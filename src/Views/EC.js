@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import api from '../services/api';
 import Panel from './Partials/Panel';
 import Product from './Partials/Product';
 import loadingGif from '../assets/loading.gif';
 import './EC.css';
+
+
 
 
 // Panel
@@ -27,7 +30,8 @@ class Vault extends Component {
 
   getClientToken = async () => {
     console.log('getClientToken');
-    const CLIENT_AUTHORIZATION = await axios.get('http://localhost:3333/get-client-token');
+    // const CLIENT_AUTHORIZATION = await axios.get('http://localhost:3333/get-client-token');
+    const CLIENT_AUTHORIZATION = await api.get('get-client-token');
     console.log('CLIENT_AUTHORIZATION.data');
     console.log(CLIENT_AUTHORIZATION.data);
     this.setState({ clientAuthorizationResponse: CLIENT_AUTHORIZATION.data })

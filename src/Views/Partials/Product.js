@@ -8,10 +8,10 @@ import React, { Component } from "react";
 class Product extends Component {
   renderProduct(product){
     return(
-      <div class="jumbotron jumbotron-fluid">
-        <div class="container">
-          {/*// <h1 class="display-4">{product}</h1>*/}
-          <p class="lead">{this.renderProductInfo({product})}</p>
+      <div className="jumbotron jumbotron-fluid">
+        <div className="container">
+          {/*// <h1 className="display-4">{product}</h1>*/}
+          <p className="lead">{this.renderProductInfo({product})}</p>
         </div>
       </div>
     )
