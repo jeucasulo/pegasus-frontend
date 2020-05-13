@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import api from '../services/api';
-import Panel from './Partials/Panel';
+import Install from './Partials/Install';
 import Product from './Partials/Product';
+import ClientSide from './Partials/ClientSide';
+
 import loadingGif from '../assets/loading.gif';
 import './EC.css';
 
@@ -35,6 +37,12 @@ class Vault extends Component {
     console.log('CLIENT_AUTHORIZATION.data');
     console.log(CLIENT_AUTHORIZATION.data);
     this.setState({ clientAuthorizationResponse: CLIENT_AUTHORIZATION.data })
+
+    const newoutput = JSON.stringify(CLIENT_AUTHORIZATION.data, null, '\t');
+
+    // document.getElementById("CreatePaymentJsonResponseOutput").innerHTML = output;
+    document.getElementById("installTextAreaJsonResponse").value = newoutput;
+
     return CLIENT_AUTHORIZATION.data.clientToken;
   }
 
@@ -194,11 +202,11 @@ class Vault extends Component {
                       </div>
 
                       <div className="tab-pane fade" id="v-pills-install" role="tabpanel" aria-labelledby="v-pills-install-tab">
-                        <Panel product={'profile'} language={this.state.language} response={this.state.clientAuthorizationResponse} />
+                        <Install product={'profile'} language={this.state.language} response={this.state.clientAuthorizationResponse} />
                       </div>
 
-                      <div className="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-                        Messages
+                      <div className="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">                        
+                        <ClientSide product={'profile'} language={this.state.language} response={this.state.clientAuthorizationResponse} />                        
                       </div>
 
                       <div className="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">

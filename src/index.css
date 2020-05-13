@@ -38,6 +38,9 @@ code {
   padding: 20px;
   resize: both;
 }
+textarea.textareaResponse{
+  font-size: 8pt;
+}
 .codeBlock{
   background-color:black;
   border-radius: 0.25rem;
@@ -68,4 +71,7 @@ code {
 }
 .codeBlockVarPhp{
   color:#F66801;
+}
+.commentLine{
+  color:#5B5B5B
 }

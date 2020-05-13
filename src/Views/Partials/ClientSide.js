@@ -8,7 +8,7 @@ import flowImg from '../../assets/flow.png';
 
 
 
-class Panel extends Component {
+class ClientSide extends Component {
   
   renderInstallsScriptSwitch = {
     // Node(){alert('node')},
@@ -91,7 +91,7 @@ class Panel extends Component {
                 </svg>
                 &emsp;
               </a>
-              <a className="nav-item nav-link" id="nav-install-tab" data-toggle="tab" href="#nav-install" role="tab" aria-controls="nav-install" aria-selected="false">
+              <a className="nav-item nav-link" id="nav-client-install-tab" data-toggle="tab" href="#nav-client-install" role="tab" aria-controls="nav-client-install" aria-selected="false">
                 &emsp;
                 <svg className="bi bi-braces" width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path d="M4.114 10.063V9.9c1.005-.102 1.497-.615 1.497-1.6V6.503c0-1.094.39-1.538 1.354-1.538h.273V4h-.376C5.25 4 4.49 4.759 4.49 6.352v1.524c0 1.094-.376 1.456-1.49 1.456v1.299c1.114 0 1.49.362 1.49 1.456v1.524c0 1.593.759 2.352 2.372 2.352h.376v-.964h-.273c-.964 0-1.354-.444-1.354-1.538v-1.798c0-.984-.492-1.497-1.497-1.6zM15.886 9.9v.163c-1.005.103-1.497.616-1.497 1.6v1.798c0 1.094-.39 1.538-1.354 1.538h-.273v.964h.376c1.613 0 2.372-.759 2.372-2.352v-1.524c0-1.094.376-1.456 1.49-1.456V9.332c-1.114 0-1.49-.362-1.49-1.456V6.352C15.51 4.759 14.75 4 13.138 4h-.376v.964h.273c.964 0 1.354.444 1.354 1.538V8.3c0 .984.492 1.497 1.497 1.6z"></path>
@@ -137,13 +137,18 @@ class Panel extends Component {
               <h5>Step 5</h5>
               <p>Your server code receives the payment method nonce and then uses the server SDK to create a transaction.</p>
 
+              <br/>
+              
+              <p><a className='btn btn-primary' href="https://developers.braintreepayments.com/start/overview" target="_blank" rel='noopener noreferrer' >See more</a></p>
+
+
 
               {/* C:\Users\jjunior\Google Drive\PayPal\Pegasus\frontend\src\assets\flow.png 
               */}
 
             </div>
 
-            <div className="tab-pane fade" id="nav-install" role="tabpanel" aria-labelledby="nav-install-tab">
+            <div className="tab-pane fade" id="nav-client-install" role="tabpanel" aria-labelledby="nav-client-install-tab">
               {
                 /*
                 {this.renderInstallScript(this.props.language)}
@@ -163,6 +168,8 @@ class Panel extends Component {
 
             <div className="tab-pane fade" id="nav-config" role="tabpanel" aria-labelledby="nav-config-tab">
               N/A
+              https://developers.braintreepayments.com/guides/paypal/client-side/javascript/v3
+              https://developers.braintreepayments.com/guides/paypal/checkout-with-paypal/javascript/v3
             </div>
           </div>
 
@@ -172,4 +179,4 @@ class Panel extends Component {
   }
 }
  
-export default Panel;
+export default ClientSide;
