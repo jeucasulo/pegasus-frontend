@@ -117,9 +117,8 @@ class ClientSide extends Component {
                           <p><span className='codeBlockVar'>&ensp;&ensp;&ensp;return</span> paypalCheckoutInstance.createPayment(&#123;	</p>
                             {/* <p className='commentLine'>&ensp;&ensp;&ensp;&ensp;// Your PayPal options here. For available options, see</p>
                             <p className='commentLine'>&ensp;&ensp;&ensp;&ensp;// http://braintree.github.io/braintree-web/current/PayPalCheckout.html#createPayment</p> */}
-                            <p>&ensp;&ensp;&ensp;&ensp;flow: <span className='codeBlockString'>'checkout'</span>, <span className='commentLine'>// Required</span></p>
-                            <p>&ensp;&ensp;&ensp;&ensp;amount: 10.00, <span className='commentLine'>// Required</span></p>
-                            <p>&ensp;&ensp;&ensp;&ensp;currency: <span className='codeBlockString'>'USD'</span>, <span className='commentLine'>// Required</span></p>
+                            <p>&ensp;&ensp;&ensp;&ensp;flow: <span className='codeBlockString'>'vault'</span>, <span className='commentLine'>// Required</span></p>
+                            <p>&ensp;&ensp;&ensp;&ensp;billingAgreementDescription: <span className='codeBlockString'>'Your agreement description'</span>, <span className='commentLine'>// Required</span></p>                            
                             <p>&ensp;&ensp;&ensp;&ensp;enableShippingAddress: <span className='codeBlockRequire'>true</span>,</p>
                             <p>&ensp;&ensp;&ensp;&ensp;shippingAddressEditable: <span className='codeBlockRequire'>false</span>,</p>
                             <p>&ensp;&ensp;&ensp;&ensp;shippingAddressOverride: &#123;</p>
@@ -170,7 +169,7 @@ class ClientSide extends Component {
             <br/>
             <p>
               <a className='btn btn-primary' href="https://developers.braintreepayments.com/guides/paypal/client-side/javascript/v3" target="_blank" rel='noopener noreferrer' >Client side</a>
-              <a className='btn btn-primary float-right' href="https://developers.braintreepayments.com/guides/paypal/checkout-with-paypal/javascript/v3" target="_blank" rel='noopener noreferrer' >Checkout</a>
+              <a className='btn btn-primary float-right' href="https://developers.braintreepayments.com/guides/paypal/vault/javascript/v3" target="_blank" rel='noopener noreferrer' >Vault</a>
             </p>
             
             {/* <p></p> */}
@@ -271,7 +270,7 @@ class ClientSide extends Component {
                       <p><span className='codeBlockVar'>&ensp;&ensp;&ensp;return</span> paypalCheckoutInstance.createPayment(&#123;	</p>
                         {/* <p className='commentLine'>&ensp;&ensp;&ensp;&ensp;// Your PayPal options here. For available options, see</p>
                         <p className='commentLine'>&ensp;&ensp;&ensp;&ensp;// http://braintree.github.io/braintree-web/current/PayPalCheckout.html#createPayment</p> */}
-                        <p>&ensp;&ensp;&ensp;&ensp;flow: <span className='codeBlockString'>'checkout'</span>, <span className='commentLine'>// Required</span></p>
+                        <p>&ensp;&ensp;&ensp;&ensp;flow: <span className='codeBlockString'>'vault'</span>, <span className='commentLine'>// Required</span></p>
                         <p>&ensp;&ensp;&ensp;&ensp;amount: 10.00, <span className='commentLine'>// Required</span></p>
                         <p>&ensp;&ensp;&ensp;&ensp;currency: <span className='codeBlockString'>'USD'</span>, <span className='commentLine'>// Required</span></p>
                         <p>&ensp;&ensp;&ensp;&ensp;enableShippingAddress: <span className='codeBlockRequire'>true</span>,</p>
@@ -450,6 +449,7 @@ class ClientSide extends Component {
             </div>
 
             <div className="tab-pane fade" id="nav-client-response" role="tabpanel" aria-labelledby="nav-client-response-tab">    
+              <br/>
               Renders the PayPal button
             </div>
 

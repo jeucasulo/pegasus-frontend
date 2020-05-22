@@ -450,6 +450,7 @@ class ClientSide extends Component {
             </div>
 
             <div className="tab-pane fade" id="nav-client-response" role="tabpanel" aria-labelledby="nav-client-response-tab">    
+              <br/>
               Renders the PayPal button
             </div>
 

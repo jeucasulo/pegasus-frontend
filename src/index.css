@@ -73,5 +73,15 @@ textarea.textareaResponse{
   color:#F66801;
 }
 .commentLine{
-  color:#5B5B5B
+  /* color:#5B5B5B */
+  color:#888888;
+  /* font-family: "B_Proportional-Bold", courier, monospace; */
+  /* cursor: text;
+    font-family: "B_Proportional-Bold", courier, monospace;
+    font-weight: 800;
+    max-width: 100%; */
+
+}
+.propCode{
+  color:#D75D05
 }

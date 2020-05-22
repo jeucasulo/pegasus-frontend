@@ -1,9 +1,12 @@
 import React from 'react';
-import Vault from './Views/Vault';
+
+import Checkout from './Views/Checkout/Checkout';
+// import Vault from './Views/Vault';
+import Vault from './Views/Vault/Vault';
 import Dcc from './Views/DCC';
 import Header from './Views/Header';
 // import Footer from './Views/Footer';
-import Ec from './Views/EC';
+
 import HostedFields from './Views/HostedFields';
 import './assets/bootstrap.min.css';
 import {
@@ -20,11 +23,11 @@ function App() {
       </Header>
       <div>
         <Switch>
-          <Route path="/ec">
-            <Ec/>
+          <Route path="/checkout">
+            <Checkout />
           </Route>
           <Route path="/vault">
-            <Vault/>
+            <Vault />
           </Route>
           <Route path="/dcc">
             <Dcc />
