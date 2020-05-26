@@ -9,6 +9,7 @@ import ClientSide from './ClientSide';
 import loadingGif from '../../assets/loading.gif';
 import './Vault.css';
 import ServerSide from "./ServerSide";
+import Transaction from "./Transaction";
 // import uuid from 'react-uuid';
 
 
@@ -22,15 +23,47 @@ import ServerSide from "./ServerSide";
 
 class Vault extends Component {
   componentDidMount() {
+    this.setUserProfile();
+    this.checkPayPalVault();
     // this.getClientToken();
     this.createPayPalButton();
   }
 
+
   state = {
     language: 'Node',
     loading: true,
+    vault: false,
     transaction: false,
+    paypalVaultTokenization: false,
+    amount: 50
+    // paypalVaultTokenizationToken: "",
     // clientAuthorizationResponse: 'Waiting...'
+  }
+
+  setUserProfile = () => {
+    if (localStorage.getItem("user")) {
+      console.log(localStorage.getItem("user"));
+    } else {
+      let id = Math.random().toString(36).substr(2, 15);
+      let user = "user_" + id + "@test.com"
+      localStorage.setItem("user", user);
+      console.log("User created");
+      console.log(user);
+    }
+  }
+
+  checkPayPalVault = () => {
+    // const token = localStorage.getItem('vaultPayPalToken');
+    if (localStorage.getItem('vaultPayPalToken')) {
+      console.log('PayPal vaulted')
+      this.setState({ paypalVaultTokenization: true })
+      this.setState({ vault: true });
+
+    } else {
+      console.log('PayPal not vaulted');
+    }
+
   }
 
 
@@ -57,34 +90,23 @@ class Vault extends Component {
 
 
     const createVault = async (payload) => {
-      const payment = await api.post('create-vault', {
+      const vault = await api.post('create-customer', {
         amount: 30,
         nonce: payload.nonce
       });
-      console.log('payment');
-      console.log(payment);
+      console.log('vault');
+      console.log(vault);
 
-      const newoutput = JSON.stringify(payment.data, null, '\t');
+      const newoutput = JSON.stringify(vault.data, null, '\t');
       document.getElementById("serversideTextAreaJsonResponse").value = newoutput;
 
-      this.setState({ transaction: true })
+      this.setState({ vault: true });
+      console.log('data.customer.paymentMethods[0].token');
+      console.log(vault.data.customer.paymentMethods[0].token);
 
-      return payment;
-    }
-    const createTransaction = async (payload) => {
-      const payment = await api.post('create-payment', {
-        amount: 30,
-        nonce: payload.nonce
-      });
-      console.log('payment');
-      console.log(payment);
+      localStorage.setItem('vaultPayPalToken', vault.data.customer.paymentMethods[0].token);
 
-      const newoutput = JSON.stringify(payment.data, null, '\t');
-      document.getElementById("serversideTextAreaJsonResponse").value = newoutput;
-
-      this.setState({ transaction: true })
-
-      return payment;
+      return vault;
     }
 
 
@@ -172,6 +194,29 @@ class Vault extends Component {
     });
   }
 
+  createVaultTransaction = async () => {
+    const token = localStorage.getItem('vaultPayPalToken');
+    console.log('createVaultTransaction');
+    console.log(this.state.amount);
+    // const amount = { this.state.amount };
+    // const customerId = localStorage.getItem('customerId');
+    const payment = await api.post('create-vault-transaction', {
+      amount: this.state.amount,
+      // token: '7nd3dr2'
+      token: token
+    });
+    console.log('payment');
+    console.log(payment);
+
+    const newoutput = JSON.stringify(payment.data, null, '\t');
+    document.getElementById("transactionTextAreaJsonResponse").value = newoutput;
+
+    this.setState({ transaction: true })
+
+    return payment;
+  }
+
+
   render() {
     return (
       <>
@@ -191,11 +236,28 @@ class Vault extends Component {
                 <div id="loadingDiv" className='text-center'>
                   <div id="loadingDivCenterV" className='text-center'>
 
-                    {this.state.loading &&
+                    {this.state.loading
+                      ?
                       <img src={loadingGif} alt="Loading" width='25px' />
+                      : [
+                        this.state.paypalVaultTokenization
+                          ? <div>
+
+                            <div class="p-3 mb-2 bg-dark text-white">
+                              <input className='form-control' type="number" step='10' value={this.state.amount} onChange={(val) => { this.setState({ amount: val.target.value }) }} />
+                            </div>
+
+                            <br />
+                            <div><button className='btn btn-success' onClick={() => this.createVaultTransaction()}>Pay</button></div>
+                          </div>
+                          :
+                          <div id="paypal-button"></div>
+                      ]
                     }
 
-                    <div id="paypal-button"></div>
+
+
+
 
                   </div>
                 </div>
@@ -232,11 +294,18 @@ class Vault extends Component {
                     </a>
                     <a className="nav-link" id="v-pills-serverside-tab" data-toggle="pill" href="#v-pills-serverside" role="tab" aria-controls="v-pills-serverside" aria-selected="false">
                       Server-Side
-                      {this.state.transaction &&
+                      {this.state.vault &&
                         <span className='float-right'>&#10004;</span>
                       }
 
                     </a>
+                    <a className="nav-link" id="v-pills-transaction-tab" data-toggle="pill" href="#v-pills-transaction" role="tab" aria-controls="v-pills-transaction" aria-selected="false">
+                      Transaction
+                      {this.state.transaction &&
+                        <span className='float-right'>&#10004;</span>
+                      }
+                    </a>
+
                     <select className="nav-link" id="v-pills-language-tab" data-toggle="pill" href="#v-pills-language" role="tab" aria-controls="v-pills-language" aria-selected="false"
                       onChange={e => this.setState({ language: e.target.value })}
                     >
@@ -266,6 +335,10 @@ class Vault extends Component {
 
                     <div className="tab-pane fade" id="v-pills-serverside" role="tabpanel" aria-labelledby="v-pills-serverside-tab">
                       <ServerSide product={'profile'} language={this.state.language} response={this.state.clientAuthorizationResponse} />
+                    </div>
+
+                    <div className="tab-pane fade" id="v-pills-transaction" role="tabpanel" aria-labelledby="v-pills-transaction-tab">
+                      <Transaction product={'profile'} language={this.state.language} response={this.state.clientAuthorizationResponse} />
                     </div>
 
                   </div>

@@ -10,7 +10,7 @@ import flowImg from '../../assets/Installflow.png';
 
 
 
-class ServerSide extends Component {
+class Transaction extends Component {
 
   renderInstallsScriptSwitch = {
     // Node(){alert('node')},
@@ -18,8 +18,8 @@ class ServerSide extends Component {
       return (
         <>
           <br />
-          <h3>Creating Vault</h3>
-          <p>Once the customer has successfully authenticated with PayPal, include the paymentMethodNonce parameter in the transaction.sale() call on your server.</p>
+          <h3>Creating transactions</h3>
+          <p>Once the customer has successfully authenticated with PayPal, include the paymentMethodToken parameter in the transaction.sale() call on your server.</p>
 
 
           <div className='codeBlock'>
@@ -37,7 +37,7 @@ class ServerSide extends Component {
 
               <p><span className='codeBlockVar'>var</span> saleRequest = &#123;</p>
               <p>&emsp;amount: req.body.amount,</p>
-              <p>&emsp;paymentMethodNonce: req.body.nonce,</p>
+              <p>&emsp;paymentMethodToken: req.body.token,</p>
               <p>&emsp;deviceData: req.body.device_data,</p>
               <p>&emsp;orderId: <span className='codeBlockString'>"Mapped to PayPal Invoice Number"</span>,</p>
               <p>&emsp;options: &#123;</p>
@@ -67,7 +67,7 @@ class ServerSide extends Component {
           <br />
           <p>
             <a className='btn btn-primary' href="https://developers.braintreepayments.com/guides/paypal/server-side/node" target="_blank" rel='noopener noreferrer' >Server side</a>
-            <a className='btn btn-primary float-right' href="https://developers.braintreepayments.com/guides/customers/ruby#create" target="_blank" rel='noopener noreferrer' >Customers</a>
+            <a className='btn btn-primary float-right' href="https://developers.braintreepayments.com/reference/request/transaction/sale/php" target="_blank" rel='noopener noreferrer' >Transaction</a>
           </p>
 
 
@@ -79,7 +79,7 @@ class ServerSide extends Component {
         <>
           <br />
           <h3>Creating transactions</h3>
-          <p>Once the customer has successfully authenticated with PayPal, include the paymentMethodNonce parameter in the transaction.sale() call on your server.</p>
+          <p>Once the customer has successfully authenticated with PayPal, include the paymentMethodToken parameter in the transaction.sale() call on your server.</p>
           <div className='codeBlock'>
             <div className='codeBlockHeader'>
               {language}
@@ -94,7 +94,7 @@ class ServerSide extends Component {
 
               <p><span className='codeBlockVarPhp'>$result</span> = <span className='codeBlockVarPhp'>$gateway</span>->transaction()->sale([</p>
               <p>&emsp;<span className='codeBlockString'>'amount'</span> => <span className='codeBlockVarPhp'>$_POST</span>[<span className='codeBlockString'>'amount'</span>],</p>
-              <p>&emsp;<span className='codeBlockString'>'paymentMethodNonce'</span> => <span className='codeBlockVarPhp'>$_POST</span>[<span className='codeBlockString'>'payment_method_nonce'</span>],</p>
+              <p>&emsp;<span className='codeBlockString'>'paymentMethodToken'</span> => <span className='codeBlockVarPhp'>$_POST</span>[<span className='codeBlockString'>'payment_method_token'</span>],</p>
               <p>&emsp;<span className='codeBlockString'>'deviceData'</span> => <span className='codeBlockVarPhp'>$_POST</span>[<span className='codeBlockString'>'device_data'</span>],</p>
               <p>&emsp;<span className='codeBlockString'>'orderId'</span> => <span className='codeBlockVarPhp'>$_POST</span>[<span className='codeBlockString'>"Mapped to PayPal Invoice Number"</span>],</p>
               <p>&emsp;<span className='codeBlockString'>'options'</span> => [</p>
@@ -117,7 +117,7 @@ class ServerSide extends Component {
           <br />
           <p>
             <a className='btn btn-primary' href="https://developers.braintreepayments.com/guides/paypal/server-side/node" target="_blank" rel='noopener noreferrer' >Server side</a>
-            <a className='btn btn-primary float-right' href="https://developers.braintreepayments.com/guides/customers/ruby#create" target="_blank" rel='noopener noreferrer' >Customers</a>
+            <a className='btn btn-primary float-right' href="https://developers.braintreepayments.com/reference/request/transaction/sale/php" target="_blank" rel='noopener noreferrer' >Transaction</a>
           </p>
 
         </>
@@ -158,7 +158,7 @@ class ServerSide extends Component {
       <>
         <nav>
           <div className="nav nav-tabs" id="nav-tab" role="tablist">
-            <a className="nav-item nav-link active" id="nav-server-home-tab" data-toggle="tab" href="#nav-server-home" role="tab" aria-controls="nav-server-home" aria-selected="true">
+            <a className="nav-item nav-link active" id="nav-transaction-home-tab" data-toggle="tab" href="#nav-transaction-home" role="tab" aria-controls="nav-transaction-home" aria-selected="true">
               &emsp;
                 <svg className="bi bi-info" width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" d="M10 17a7 7 0 100-14 7 7 0 000 14zm8-7a8 8 0 11-16 0 8 8 0 0116 0z" clipRule="evenodd"></path>
@@ -167,14 +167,14 @@ class ServerSide extends Component {
               </svg>
                 &emsp;
               </a>
-            <a className="nav-item nav-link" id="nav-server-install-tab" data-toggle="tab" href="#nav-server-install" role="tab" aria-controls="nav-server-install" aria-selected="false">
+            <a className="nav-item nav-link" id="nav-transaction-install-tab" data-toggle="tab" href="#nav-transaction-install" role="tab" aria-controls="nav-transaction-install" aria-selected="false">
               &emsp;
                 <svg className="bi bi-braces" width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4.114 10.063V9.9c1.005-.102 1.497-.615 1.497-1.6V6.503c0-1.094.39-1.538 1.354-1.538h.273V4h-.376C5.25 4 4.49 4.759 4.49 6.352v1.524c0 1.094-.376 1.456-1.49 1.456v1.299c1.114 0 1.49.362 1.49 1.456v1.524c0 1.593.759 2.352 2.372 2.352h.376v-.964h-.273c-.964 0-1.354-.444-1.354-1.538v-1.798c0-.984-.492-1.497-1.497-1.6zM15.886 9.9v.163c-1.005.103-1.497.616-1.497 1.6v1.798c0 1.094-.39 1.538-1.354 1.538h-.273v.964h.376c1.613 0 2.372-.759 2.372-2.352v-1.524c0-1.094.376-1.456 1.49-1.456V9.332c-1.114 0-1.49-.362-1.49-1.456V6.352C15.51 4.759 14.75 4 13.138 4h-.376v.964h.273c.964 0 1.354.444 1.354 1.538V8.3c0 .984.492 1.497 1.497 1.6z"></path>
               </svg>
                 &emsp;
               </a>
-            <a className="nav-item nav-link" id="nav-server-response-tab" data-toggle="tab" href="#nav-server-response" role="tab" aria-controls="nav-server-response" aria-selected="false">
+            <a className="nav-item nav-link" id="nav-transaction-response-tab" data-toggle="tab" href="#nav-transaction-response" role="tab" aria-controls="nav-transaction-response" aria-selected="false">
               &emsp;
                 <svg className="bi bi-reply-all" width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" d="M10.002 7.013a.144.144 0 00-.202.134V8.3a.5.5 0 01-.5.5c-.667 0-2.013.005-3.3.822-.984.624-1.99 1.76-2.595 3.876 1.02-.983 2.185-1.516 3.205-1.799a8.745 8.745 0 011.921-.306 7.47 7.47 0 01.798.008h.013l.005.001h.001L9.3 11.9l.05-.498a.5.5 0 01.45.498v1.153c0 .108.11.176.202.134l3.984-2.933a.522.522 0 01.042-.028.147.147 0 000-.252.51.51 0 01-.042-.028l-3.984-2.933zM8.8 12.386a7.745 7.745 0 00-1.923.277c-1.326.368-2.896 1.201-3.94 3.08a.5.5 0 01-.933-.305c.464-3.71 1.886-5.662 3.46-6.66 1.245-.79 2.527-.942 3.336-.971v-.66a1.144 1.144 0 011.767-.96l3.994 2.94a1.147 1.147 0 010 1.946l-3.994 2.94a1.144 1.144 0 01-1.767-.96v-.667z" clipRule="evenodd"></path>
@@ -182,7 +182,7 @@ class ServerSide extends Component {
               </svg>
                 &emsp;
               </a>
-            <a className="nav-item nav-link" id="nav-server-config-tab" data-toggle="tab" href="#nav-server-config" role="tab" aria-controls="nav-server-config" aria-selected="false">
+            <a className="nav-item nav-link" id="nav-transaction-config-tab" data-toggle="tab" href="#nav-transaction-config" role="tab" aria-controls="nav-transaction-config" aria-selected="false">
               &emsp;
               <svg className="bi bi-gear" width="1em" height="1em" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" d="M10.837 3.626c-.246-.835-1.428-.835-1.674 0l-.094.319A1.873 1.873 0 016.377 5.06l-.292-.16c-.764-.415-1.6.42-1.184 1.185l.159.292a1.873 1.873 0 01-1.115 2.692l-.319.094c-.835.246-.835 1.428 0 1.674l.319.094a1.873 1.873 0 011.115 2.693l-.16.291c-.415.764.42 1.6 1.185 1.184l.292-.159a1.873 1.873 0 012.692 1.115l.094.319c.246.835 1.428.835 1.674 0l.094-.319a1.873 1.873 0 012.693-1.115l.291.16c.764.415 1.6-.42 1.184-1.185l-.159-.291a1.873 1.873 0 011.115-2.693l.319-.094c.835-.246.835-1.428 0-1.674l-.319-.094a1.873 1.873 0 01-1.115-2.692l.16-.292c.415-.764-.42-1.6-1.185-1.184l-.291.159a1.873 1.873 0 01-2.693-1.115l-.094-.319zm-2.633-.283c.527-1.79 3.064-1.79 3.592 0l.094.319a.873.873 0 001.255.52l.292-.16c1.64-.892 3.434.901 2.54 2.541l-.159.292a.873.873 0 00.52 1.255l.319.094c1.79.527 1.79 3.064 0 3.592l-.319.094a.873.873 0 00-.52 1.255l.16.292c.893 1.64-.902 3.434-2.541 2.54l-.292-.159a.873.873 0 00-1.255.52l-.094.319c-.527 1.79-3.065 1.79-3.592 0l-.094-.319a.873.873 0 00-1.255-.52l-.292.16c-1.64.893-3.433-.902-2.54-2.541l.159-.292a.873.873 0 00-.52-1.255l-.319-.094c-1.79-.527-1.79-3.065 0-3.592l.319-.094a.873.873 0 00.52-1.255l-.16-.292c-.892-1.64.901-3.433 2.541-2.54l.292.159a.873.873 0 001.255-.52l.094-.319z" clipRule="evenodd"></path>
@@ -193,7 +193,7 @@ class ServerSide extends Component {
           </div>
         </nav>
         <div className="tab-content" id="nav-tabContent">
-          <div className="tab-pane fade show active" id="nav-server-home" role="tabpanel" aria-labelledby="nav-server-home-tab">
+          <div className="tab-pane fade show active" id="nav-transaction-home" role="tabpanel" aria-labelledby="nav-transaction-home-tab">
             {/* {this.props.language} / {this.props.product}  */}
             <img src={flowImg} width={700} alt="" />
             <br />
@@ -222,7 +222,7 @@ class ServerSide extends Component {
 
           </div>
 
-          <div className="tab-pane fade" id="nav-server-install" role="tabpanel" aria-labelledby="nav-server-install-tab">
+          <div className="tab-pane fade" id="nav-transaction-install" role="tabpanel" aria-labelledby="nav-transaction-install-tab">
             {
               /*
               {this.renderInstallScript(this.props.language)}
@@ -236,12 +236,12 @@ class ServerSide extends Component {
             {this.renderInstallsScriptSwitch[this.props.language](this.props.language)}
           </div>
 
-          <div className="tab-pane fade" id="nav-server-response" role="tabpanel" aria-labelledby="nav-server-response-tab">
+          <div className="tab-pane fade" id="nav-transaction-response" role="tabpanel" aria-labelledby="nav-transaction-response-tab">
             {/* {JSON.stringify(this.props.response)} */}
-            <textarea className="form-control textareaResponse" id="serversideTextAreaJsonResponse" cols="30" rows="30" ></textarea>
+            <textarea className="form-control textareaResponse" id="transactionTextAreaJsonResponse" cols="30" rows="30" ></textarea>
           </div>
 
-          <div className="tab-pane fade" id="nav-server-config" role="tabpanel" aria-labelledby="nav-server-config-tab">
+          <div className="tab-pane fade" id="nav-transaction-config" role="tabpanel" aria-labelledby="nav-transaction-config-tab">
             N/A
             </div>
         </div>
@@ -252,4 +252,4 @@ class ServerSide extends Component {
   }
 }
 
-export default ServerSide;
+export default Transaction;

@@ -1,2 +1,7 @@
 https://icons.getbootstrap.com/
 https://developers.braintreepayments.com/reference/general/validation-errors/all/ruby
+
+
+https://developers.braintreepayments.com/start/tutorial-drop-in-node
+https://developers.braintreepayments.com/start/tutorial-hosted-fields-node
+https://developers.braintreepayments.com/start/example-integrations-drop-in/using-the-examples

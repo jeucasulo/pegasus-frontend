@@ -5,6 +5,8 @@ import Checkout from './Views/Checkout/Checkout';
 import Vault from './Views/Vault/Vault';
 import Dcc from './Views/DCC';
 import Header from './Views/Header';
+import Profile from './Views/Profile';
+
 // import Footer from './Views/Footer';
 
 import HostedFields from './Views/HostedFields';
@@ -34,6 +36,9 @@ function App() {
           </Route>
           <Route path="/hosted-fields">
             <HostedFields />
+          </Route>
+          <Route path="/profile">
+            <Profile />
           </Route>
         </Switch>
       </div>
