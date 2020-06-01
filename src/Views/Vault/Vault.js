@@ -36,7 +36,8 @@ class Vault extends Component {
     vault: false,
     transaction: false,
     paypalVaultTokenization: false,
-    amount: 50
+    amount: 50,
+    userEmail: 'email@email.com'
     // paypalVaultTokenizationToken: "",
     // clientAuthorizationResponse: 'Waiting...'
   }
@@ -59,6 +60,7 @@ class Vault extends Component {
       console.log('PayPal vaulted')
       this.setState({ paypalVaultTokenization: true })
       this.setState({ vault: true });
+      this.setState({ userEmail: localStorage.getItem('vaultPayPalUserEmail') });
 
     } else {
       console.log('PayPal not vaulted');
@@ -82,6 +84,12 @@ class Vault extends Component {
 
     return CLIENT_AUTHORIZATION.data.clientToken;
   }
+  cancelVault = () => {
+    localStorage.removeItem('vaultPayPalToken');
+
+    this.setState({ vault: false });
+    this.setState({ loading: false });
+  }
 
   createPayPalButton = async () => {
     //{/* // Create a client. */}
@@ -101,13 +109,16 @@ class Vault extends Component {
       document.getElementById("serversideTextAreaJsonResponse").value = newoutput;
 
       this.setState({ vault: true });
+      this.setState({ userEmail: vault.data.customer.paypalAccounts[0].email });
       console.log('data.customer.paymentMethods[0].token');
       console.log(vault.data.customer.paymentMethods[0].token);
 
       localStorage.setItem('vaultPayPalToken', vault.data.customer.paymentMethods[0].token);
+      localStorage.setItem('vaultPayPalUserEmail', vault.data.customer.paypalAccounts[0].email);
 
       return vault;
     }
+
 
 
     // Be sure to have PayPal's checkout.js library loaded on your page.
@@ -240,18 +251,34 @@ class Vault extends Component {
                       ?
                       <img src={loadingGif} alt="Loading" width='25px' />
                       : [
-                        this.state.paypalVaultTokenization
-                          ? <div>
+                        this.state.vault
+                          ?
+                          <div>
 
                             <div class="p-3 mb-2 bg-dark text-white">
                               <input className='form-control' type="number" step='10' value={this.state.amount} onChange={(val) => { this.setState({ amount: val.target.value }) }} />
                             </div>
 
-                            <br />
-                            <div><button className='btn btn-success' onClick={() => this.createVaultTransaction()}>Pay</button></div>
+
+                            <p><span class="badge badge-secondary">{this.state.userEmail}</span></p>
+
+                            <div>
+                              <button className='btn btn-success' onClick={() => this.createVaultTransaction()}>Pay</button>
+                              <button className='btn btn-danger' onClick={() => this.cancelVault()}> &nbsp;&nbsp;X&nbsp;&nbsp; </button>
+                            </div>
+
+
+
+
                           </div>
-                          :
-                          <div id="paypal-button"></div>
+                          : [
+                            !this.state.vault
+                              ?
+                              < div id="paypal-button" ></div>
+                              :
+                              <></>
+                          ]
+
                       ]
                     }
 

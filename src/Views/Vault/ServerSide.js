@@ -19,7 +19,7 @@ class ServerSide extends Component {
         <>
           <br />
           <h3>Creating Vault</h3>
-          <p>Once the customer has successfully authenticated with PayPal, include the paymentMethodNonce parameter in the transaction.sale() call on your server.</p>
+          <p>Once the customer has successfully authenticated with PayPal, include the paymentMethodNonce parameter in the gateway.customer.create() call on your server.</p>
 
 
           <div className='codeBlock'>
@@ -27,37 +27,21 @@ class ServerSide extends Component {
               {language}
             </div>
             <div className='codeBlockBody'>
-              {/* <p><span className='codeBlockVar'>var</span> braintree = <span className='codeBlockRequire'>require</span>(<span className='codeBlockString'>"braintree"</span>);</p>
-              <p><span className='codeBlockVar'>var</span> gateway = braintree.connect(&#123;	</p>
-              <p>&emsp;environment: braintree.Environment.Sandbox,</p>
-              <p>&emsp;merchantId: <span className='codeBlockString'>"useYourMerchantId"</span>,</p>
-              <p>&emsp;publicKey: <span className='codeBlockString'>"useYourPublicKey"</span>,</p>
-              <p>&emsp;privateKey: <span className='codeBlockString'>"useYourPrivateKey"</span></p>
-              <p>&#125;);</p> */}
 
-              <p><span className='codeBlockVar'>var</span> saleRequest = &#123;</p>
-              <p>&emsp;amount: req.body.amount,</p>
-              <p>&emsp;paymentMethodNonce: req.body.nonce,</p>
-              <p>&emsp;deviceData: req.body.device_data,</p>
-              <p>&emsp;orderId: <span className='codeBlockString'>"Mapped to PayPal Invoice Number"</span>,</p>
-              <p>&emsp;options: &#123;</p>
-              <p>&emsp;&emsp;submitForSettlement: <span className='codeBlockRequire'>true</span>,</p>
-              <p>&emsp;&emsp;paypal: &#123;</p>
-              <p>&emsp;&emsp;&emsp;customField: <span className='codeBlockString'>"PayPal custom field"</span>,</p>
-              <p>&emsp;&emsp;&emsp;description: <span className='codeBlockString'>"Description for PayPal email receipt"</span>,</p>
-              <p>&emsp;&emsp;},</p>
-              <p>&emsp;}</p>
-              <p>};</p>
-              <p></p>
-              <p>gateway.transaction.sale(saleRequest, <span className='codeBlockVar'>function</span> (<span className='codeBlockRequire'>err, result</span>) &#123;</p>
-              <p>&emsp;<span className='codeBlockVar'>if</span> (err) &#123;</p>
-              <p>&emsp;&emsp;res.send(<span className='codeBlockString'>"&lt;h1>Error:  "</span> + err + <span className='codeBlockString'>"&lt;/h1>"</span>);</p>
-              <p>&emsp;} <span className='codeBlockVar'>else if</span> (result.success) &#123;</p>
-              <p>&emsp;&emsp;res.send(<span className='codeBlockString'>"&lt;h1>Success! Transaction ID: " </span>+ result.transaction.id + <span className='codeBlockString'>"&lt;/h1>"</span>);</p>
-              <p>&emsp;} <span className='codeBlockVar'>else</span> &#123;</p>
-              <p>&emsp;&emsp;res.send(<span className='codeBlockString'>"&lt;h1>Error:  "</span> + result.message + <span className='codeBlockString'>"&lt;/h1>"</span>);</p>
-              <p>&emsp;}</p>
-              <p>});</p>
+              <p> gateway.customer.create(&#123;</p>
+              <p>&emsp; firstName: <span className='codeBlockString'>"Charity"</span>,</p>
+              <p>&emsp; lastName: <span className='codeBlockString'>"Smith"</span>,</p>
+              <p>&emsp; paymentMethodNonce: nonceFromTheClient</p>
+              <p> }, <span class='codeBlockVar'>function</span> <span className='codeBlockString'>(</span><span className='codeBlockRequire'>err, result</span><span className='codeBlockString'>)</span> &#123;</p>
+              <p> &emsp;result.success;</p>
+              <p> &emsp;<span class='commentLine'>// true</span></p>
+
+              <p> &emsp;result.customer.id;</p>
+              <p> &emsp;<span class='commentLine'>// e.g 160923</span></p>
+
+              <p> &emsp;result.customer.paymentMethods[<span className='codeBlockRequire'>0</span>].token;</p>
+              <p> &emsp;<span class='commentLine'>// e.g f28wm</span></p>
+              <p> });</p>
 
 
 
@@ -66,8 +50,8 @@ class ServerSide extends Component {
 
           <br />
           <p>
-            <a className='btn btn-primary' href="https://developers.braintreepayments.com/guides/paypal/server-side/node" target="_blank" rel='noopener noreferrer' >Server side</a>
-            <a className='btn btn-primary float-right' href="https://developers.braintreepayments.com/guides/customers/ruby#create" target="_blank" rel='noopener noreferrer' >Customers</a>
+            <a className='btn btn-primary' href="https://developers.braintreepayments.com/reference/request/customer/create/node" target="_blank" rel='noopener noreferrer' >Server side</a>
+            <a className='btn btn-primary float-right' href="https://developers.braintreepayments.com/reference/request/customer/create/node" target="_blank" rel='noopener noreferrer' >Customers</a>
           </p>
 
 
@@ -78,38 +62,29 @@ class ServerSide extends Component {
       return (
         <>
           <br />
-          <h3>Creating transactions</h3>
-          <p>Once the customer has successfully authenticated with PayPal, include the paymentMethodNonce parameter in the transaction.sale() call on your server.</p>
+          <h3>CREATING VAULT</h3>
+          <p>Once the customer has successfully authenticated with PayPal, include the paymentMethodNonce parameter in the gateway.customer.create() call on your server.</p>
           <div className='codeBlock'>
             <div className='codeBlockHeader'>
               {language}
             </div>
             <div className='codeBlockBody'>
-              {/* <p><span className='codeBlockVarPhp'>$gateway</span> = <span className='codeBlockVar'>new</span> Braintree_Gateway([</p>
-            <p>&emsp;<span className='codeBlockString'>'environment'</span> => <span className='codeBlockString'>'sandbox'</span>,</p>
-            <p>&emsp;<span className='codeBlockString'>'merchantId'</span> => <span className='codeBlockString'>'use_your_merchant_id'</span>,</p>
-            <p>&emsp;<span className='codeBlockString'>'publicKey'</span> => <span className='codeBlockString'>'use_your_public_key'</span>,</p>
-            <p>&emsp;<span className='codeBlockString'>'privateKey'</span> => <span className='codeBlockString'>'use_your_private_key'</span></p>
-            <p>]);</p> */}
 
-              <p><span className='codeBlockVarPhp'>$result</span> = <span className='codeBlockVarPhp'>$gateway</span>->transaction()->sale([</p>
-              <p>&emsp;<span className='codeBlockString'>'amount'</span> => <span className='codeBlockVarPhp'>$_POST</span>[<span className='codeBlockString'>'amount'</span>],</p>
-              <p>&emsp;<span className='codeBlockString'>'paymentMethodNonce'</span> => <span className='codeBlockVarPhp'>$_POST</span>[<span className='codeBlockString'>'payment_method_nonce'</span>],</p>
-              <p>&emsp;<span className='codeBlockString'>'deviceData'</span> => <span className='codeBlockVarPhp'>$_POST</span>[<span className='codeBlockString'>'device_data'</span>],</p>
-              <p>&emsp;<span className='codeBlockString'>'orderId'</span> => <span className='codeBlockVarPhp'>$_POST</span>[<span className='codeBlockString'>"Mapped to PayPal Invoice Number"</span>],</p>
-              <p>&emsp;<span className='codeBlockString'>'options'</span> => [</p>
-              <p>&emsp;&emsp;<span className='codeBlockString'>'submitForSettlement'</span> => <span className='codeBlockVar'>True</span>,</p>
-              <p>&emsp;&emsp;<span className='codeBlockString'>'paypal'</span> => [</p>
-              <p>&emsp;&emsp;&emsp;<span className='codeBlockString'>'customField'</span> => <span className='codeBlockVarPhp'>$_POST</span>[<span className='codeBlockString'>"PayPal custom field"</span>],</p>
-              <p>&emsp;&emsp;&emsp;<span className='codeBlockString'>'description'</span> => <span className='codeBlockVarPhp'>$_POST</span>[<span className='codeBlockString'>"Description for PayPal email receipt"</span>],</p>
-              <p>&emsp;&emsp;],</p>
-              <p>&emsp;],</p>
-              <p>]);</p>
-              <p><span className='codeBlockVar'>if</span> (<span className='codeBlockVarPhp'>$result</span>->success) &#123;</p>
-              <p>&emsp;print_r(<span className='codeBlockString'>"Success ID: "</span>.<span className='codeBlockVarPhp'>$result</span> -> transaction -> id);</p>
-              <p>} <span className='codeBlockVar'>else</span> &#123;</p>
-              <p>&emsp;print_r(<span className='codeBlockString'>"Error Message: "</span>.<span className='codeBlockVarPhp'>$result</span> -> message);</p>
-              <p>}</p>
+          <p><span className='codeBlockVarPhp'>$result</span> = <span className='codeBlockVarPhp'>$gateway</span>->customer()->create([</p>
+              <p>&emsp;<span className='codeBlockString'>'firstName'</span> => <span className='codeBlockString'>'Mike'</span>,</p>
+              <p>&emsp;<span className='codeBlockString'>'lastName'</span> => <span className='codeBlockString'>'Jones'</span>,</p>
+              <p>&emsp;<span className='codeBlockString'>'company'</span> => <span className='codeBlockString'>'Jones Co.'</span>,</p>
+              <p>&emsp;<span className='codeBlockString'>'paymentMethodNonce'</span> => nonceFromTheClient</p>
+          <p>]);</p>
+          <p><span className='codeBlockVar'>if</span> (<span className='codeBlockVarPhp'>$result</span>->success) &#123;</p>
+              <p>&emsp;<span className='codeBlockVar'>echo</span>(<span className='codeBlockVarPhp'>$result</span>->customer->id);</p>
+              <p>&emsp;<span className='codeBlockVar'>echo</span>(<span className='codeBlockVarPhp'>$result</span>->customer->paymentMethods[0]->token);</p>
+          <p>} <span className='codeBlockVar'>else</span> &#123;</p>
+              <p>&emsp;<span className='codeBlockVar'>foreach</span>(<span className='codeBlockVarPhp'>$result</span>->errors->deepAll() <span className='codeBlockVar'>AS</span> <span className='codeBlockVarPhp'>$error</span>) &#123;</p>
+                  <p>&emsp;&emsp;<span className='codeBlockVar'>echo</span>(<span className='codeBlockVarPhp'>$error</span>->code . <span className='codeBlockString'>": " </span>.<span className='codeBlockVarPhp'> $error</span>->message . <span className='codeBlockString'>"\n"</span>);</p>
+              <p>&emsp;}</p>
+          <p>}</p>
+
 
             </div>
           </div>
