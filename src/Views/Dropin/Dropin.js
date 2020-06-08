@@ -80,14 +80,15 @@ class Dropin extends Component {
     console.log('getClientToken---');
     // const CLIENT_AUTHORIZATION = await axios.get('http://localhost:3333/get-client-token');
     var customerId = "";
+    var customerObj;
     if (!localStorage.getItem('customerId')) {
       // customerId = await api.post('create-customer-no-nonce');
-      customerId = await api.post('create-customer-no-nonce');
-      console.log('customerId.data.customer.id');
-      console.log(customerId.data.customer.id);
-      this.setState({ customerId: customerId.data.customer.id })
-      customerId = customerId.data.customer.id;
-      localStorage.setItem('customerId', customerId.data.customer.id)
+      customerObj = await api.post('create-customer-no-nonce');
+      console.log('customerObj.data.customer.id');
+      console.log(customerObj.data.customer.id);
+      this.setState({ customerObj: customerId.data.customer.id })
+      customerId = customerObj.data.customer.id;
+      localStorage.setItem('customerId', customerId)
     } else {
       customerId = localStorage.getItem('customerId')
       console.log('ok ja tem customer blz');
