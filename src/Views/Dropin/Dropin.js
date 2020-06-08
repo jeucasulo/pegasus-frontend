@@ -82,7 +82,7 @@ class Dropin extends Component {
     var customerId = "";
     if (!localStorage.getItem('customerId')) {
       // customerId = await api.post('create-customer-no-nonce');
-      customerObj = await api.post('create-customer-no-nonce');
+      customerId = await api.post('create-customer-no-nonce');
       console.log('customerId.data.customer.id');
       console.log(customerId.data.customer.id);
       this.setState({ customerId: customerId.data.customer.id })
