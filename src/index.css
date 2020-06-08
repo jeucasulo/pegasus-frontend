@@ -24,6 +24,30 @@ code {
   background-color: #f7f7f9;
   border: 1px solid #e2e2e9;
 }
+#loadingContainerDropin{
+  height: 200px;
+  background-color: #f7f7f9;
+  border: 1px solid #e2e2e9;
+}
+#loadingDivDropin{
+  height: 200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  resize: both;
+}
+#loadingDivCenterVDropin{
+  /* color: white; */
+  width: 100%;
+  padding: 20px;
+  /* resize: both; */
+}
+
+#dropin-container{
+  z-index: 999;
+  /* background-color: red; */
+}
 #loadingDiv{
   height: 200px;
   margin: 0 auto;

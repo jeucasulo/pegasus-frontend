@@ -1,15 +1,16 @@
 import React from 'react';
 
-import Checkout from './Views/Checkout/Checkout';
-// import Vault from './Views/Vault';
-import Vault from './Views/Vault/Vault';
-import Dcc from './Views/DCC';
 import Header from './Views/Header';
+import Checkout from './Views/Checkout/Checkout';
+import Vault from './Views/Vault/Vault';
+import Dcc from './Views/DCC'; // not using
+import Dropin from './Views/Dropin/Dropin';
+import HostedFields from './Views/HostedFields/HostedFields';
 import Profile from './Views/Profile';
 
 // import Footer from './Views/Footer';
 
-import HostedFields from './Views/HostedFields';
+
 import './assets/bootstrap.min.css';
 import {
   BrowserRouter as Router,
@@ -33,6 +34,9 @@ function App() {
           </Route>
           <Route path="/dcc">
             <Dcc />
+          </Route>
+          <Route path="/dropin">
+            <Dropin />
           </Route>
           <Route path="/hosted-fields">
             <HostedFields />

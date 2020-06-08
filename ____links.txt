@@ -4,4 +4,22 @@ https://developers.braintreepayments.com/reference/general/validation-errors/all
 
 https://developers.braintreepayments.com/start/tutorial-drop-in-node
 https://developers.braintreepayments.com/start/tutorial-hosted-fields-node
+https://developers.braintreepayments.com/guides/hosted-fields/overview/javascript/v2 
 https://developers.braintreepayments.com/start/example-integrations-drop-in/using-the-examples
+
+tokenize cards using customer
+https://developers.braintreepayments.com/guides/drop-in/customization/javascript/v3
+
+
+styling hosted fields
+https://developers.braintreepayments.com/guides/hosted-fields/styling/javascript/v3
+
+
+transactions list
+https://developers.braintreepayments.com/reference/request/transaction/search/node
+search created filter
+https://developers.braintreepayments.com/reference/request/transaction/search/node#created_at
+
+https://developers.braintreepayments.com/reference/request/transaction-line-item/find-all/node
+https://developers.braintreepayments.com/reference/response/transaction/node
+https://developers.braintreepayments.com/reference/request/transaction/refund/node

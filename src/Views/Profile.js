@@ -6,7 +6,9 @@ class Profile extends Component {
     // loading: true,
     // transaction: false,
     // clientAuthorizationResponse: 'Waiting...'
-    userEmail: 'test'
+    userEmail: 'test',
+    customerId: localStorage.getItem('customerId'),
+    paypalVault: localStorage.getItem('vaultPayPalUserEmail'),
   }
 
   componentDidMount() {
@@ -40,8 +42,9 @@ class Profile extends Component {
                 </div>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">User email: <span id='userEmail'>{this.state.userEmail}</span></li>
-                  <li class="list-group-item">PayPal account tokenization:</li>
-                  <li class="list-group-item">Credit Card tokenization:</li>
+                  <li class="list-group-item">PayPal account tokenization (Vault): {this.state.paypalVault}</li>
+                  {/* <li class="list-group-item">Credit Card tokenization(Hosted fields):</li> */}
+                  <li class="list-group-item">Customer id (Dropin): {this.state.customerId}</li>
                 </ul>
               </div>
 
