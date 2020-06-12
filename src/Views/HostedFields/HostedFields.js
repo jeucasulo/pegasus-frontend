@@ -45,21 +45,21 @@ class HostedFields extends Component {
     // clientAuthorizationResponse: 'Waiting...'
 
     //here
-    cardNumberLabelBorderColor: 'black',
+    cardNumberLabelBorderColor: 'transparent',
     cardNumberLabelBorderSize: '1px',
     cardNumberLabelBgColor: 'transparent',
     cardNumberInputBorderColor: 'black',
     cardNumberInputBorderSize: '1px',
     cardNumberInputBgColor: 'transparent',
 
-    cvvLabelBorderColor: 'black',
+    cvvLabelBorderColor: 'transparent',
     cvvLabelBorderSize: '1px',
     cvvLabelBgColor: 'transparent',
     cvvInputBorderColor: 'black',
     cvvInputBorderSize: '1px',
     cvvInputBgColor: 'transparent',
 
-    expirationLabelBorderColor: 'black',
+    expirationLabelBorderColor: 'transparent',
     expirationLabelBorderSize: '1px',
     expirationLabelBgColor: 'transparent',
     expirationInputBorderColor: 'black',
@@ -289,7 +289,7 @@ class HostedFields extends Component {
 
   render() {
     const cardNumberLabelStyle = {
-      border: 'none',
+      border: 'solid',
       backgroundColor: this.state.cardNumberLabelBgColor,
       borderWidth: this.state.cardNumberLabelBorderSize,
       borderColor: this.state.cardNumberLabelBorderColor,
@@ -303,7 +303,7 @@ class HostedFields extends Component {
       borderColor: this.state.cardNumberInputBorderColor
     };
     const cvvLabelStyle = {
-      border: 'none',
+      border: 'solid',
       backgroundColor: this.state.cvvLabelBgColor,
       borderWidth: this.state.cvvLabelBorderSize,
       borderColor: this.state.cvvLabelBorderColor,
@@ -317,7 +317,7 @@ class HostedFields extends Component {
       borderColor: this.state.cvvInputBorderColor
     };
     const expirationLabelStyle = {
-      border: 'none',
+      border: 'solid',
       backgroundColor: this.state.expirationLabelBgColor,
       borderWidth: this.state.expirationLabelBorderSize,
       borderColor: this.state.expirationLabelBorderColor,
