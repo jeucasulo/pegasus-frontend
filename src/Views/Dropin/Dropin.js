@@ -230,16 +230,19 @@ class Dropin extends Component {
   }
   createTransaction = async (payload) => {
     const payment = await api.post('create-payment', {
-      amount: 30,
+      // amount: 30,
+      amount: this.state.amount,
       nonce: payload.nonce
     });
     console.log('payment');
     console.log(payment);
 
     const newoutput = JSON.stringify(payment.data, null, '\t');
-    document.getElementById("serversideTextAreaJsonResponse").value = newoutput;
+    document.getElementById("transactionTextAreaJsonResponse").value = newoutput;
 
     this.setState({ transaction: true })
+    // window.location.reload(false);
+
 
     return payment;
   }
@@ -264,6 +267,31 @@ class Dropin extends Component {
     localStorage.setItem('vaultCCNumberData', vault.data.customer.creditCards[0].email);
 
     return vault;
+  }
+
+  deleteCustomer = async () => {
+    const deleteCustomerVar = await api.post('delete-customer', {
+      customerId: this.state.customerId
+    });
+    console.log('deleteCustomerVar');
+    console.log(deleteCustomerVar);
+
+    const newoutput = JSON.stringify(deleteCustomerVar.data, null, '\t');
+    document.getElementById("serversideTextAreaJsonResponse").value = newoutput;
+
+    localStorage.removeItem('customerId');
+    this.setState({ customerId: null })
+
+
+    // this.setState({ vault: true });
+    // this.setState({ userEmail: vault.data.customer.creditCards[0].email });
+    // console.log('data.customer.paymentMethods[0].token');
+    // console.log(vault.data.customer.paymentMethods[0].token);
+
+    // localStorage.setItem('vaultCCToken', vault.data.customer.paymentMethods[0].token);
+    // localStorage.setItem('vaultCCNumberData', vault.data.customer.creditCards[0].email);
+
+    // return vault;
   }
 
 
@@ -309,15 +337,20 @@ class Dropin extends Component {
                 ?
                 <img src={loadingGif} alt="Loading" width='25px' />
                 // <div></div>
-                : [
-                  <div className="container" >
+                :
+                [
+                  < div className="container" >
                     <div className="row">
                       <div className="col text-center">
                         <br />
                         <br />
                         <br />
+                        {!this.state.transaction &&
+                          <div id="dropin-container"></div>
+                        }
 
-                        <div id="dropin-container"></div>
+
+
 
                       </div>
                     </div>
@@ -326,8 +359,21 @@ class Dropin extends Component {
                 ]
               }
               <br />
-              <p>Customer Id:{this.state.customerId}</p>
+              {this.state.customerId &&
+                < p > Customer Id:{this.state.customerId} <button className='btn btn-danger' onClick={() => { this.deleteCustomer() }}>X</button> </p>
+              }
+
               <br />
+              <p>
+
+                <div class="p-3 mb-2 bg-dark text-white">
+                  <input className='form-control' type="number" step='10' value={this.state.amount} onChange={(val) => { this.setState({ amount: val.target.value }) }} />
+                </div>
+
+
+
+
+              </p>
 
               <button id="submit-button" >Request payment method</button>
 
@@ -365,13 +411,13 @@ class Dropin extends Component {
                       Client-Side
                       <span className='float-right'>&#10004;</span>
                     </a>
-                    <a className="nav-link" id="v-pills-serverside-tab" data-toggle="pill" href="#v-pills-serverside" role="tab" aria-controls="v-pills-serverside" aria-selected="false">
+                    {/* <a className="nav-link" id="v-pills-serverside-tab" data-toggle="pill" href="#v-pills-serverside" role="tab" aria-controls="v-pills-serverside" aria-selected="false">
                       Server-Side
                       {this.state.vault &&
                         <span className='float-right'>&#10004;</span>
                       }
 
-                    </a>
+                    </a> */}
                     <a className="nav-link" id="v-pills-transaction-tab" data-toggle="pill" href="#v-pills-transaction" role="tab" aria-controls="v-pills-transaction" aria-selected="false">
                       Transaction
                       {this.state.transaction &&

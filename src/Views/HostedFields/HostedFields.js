@@ -7,9 +7,10 @@ import ClientSide from './ClientSide';
 // import ServerSide from './ServerSide';
 
 import loadingGif from '../../assets/loading.gif';
-import './Vault.css';
+import './HostedFields.css';
 import ServerSide from "./ServerSide";
 import Transaction from "./Transaction";
+import Styling from "./Styling";
 // import uuid from 'react-uuid';
 
 
@@ -39,10 +40,33 @@ class HostedFields extends Component {
     // paypalVaultTokenization: false,
     amount: 50,
     userEmail: 'email@email.com',
-    loadingDivHeigth: 200
+    // loadingDivHeigth: 200
     // paypalVaultTokenizationToken: "",
     // clientAuthorizationResponse: 'Waiting...'
+
+    //here
+    cardNumberLabelBorderColor: 'black',
+    cardNumberLabelBorderSize: '1px',
+    cardNumberLabelBgColor: 'transparent',
+    cardNumberInputBorderColor: 'black',
+    cardNumberInputBorderSize: '1px',
+    cardNumberInputBgColor: 'transparent',
+
+    cvvLabelBorderColor: 'black',
+    cvvLabelBorderSize: '1px',
+    cvvLabelBgColor: 'transparent',
+    cvvInputBorderColor: 'black',
+    cvvInputBorderSize: '1px',
+    cvvInputBgColor: 'transparent',
+
+    expirationLabelBorderColor: 'black',
+    expirationLabelBorderSize: '1px',
+    expirationLabelBgColor: 'transparent',
+    expirationInputBorderColor: 'black',
+    expirationInputBorderSize: '1px',
+    expirationInputBgColor: 'transparent'
   }
+
   expandDiv = () => {
     // alert('asdf');
     // loadingDivHeigth
@@ -124,8 +148,7 @@ class HostedFields extends Component {
         // https://developers.braintreepayments.com/guides/hosted-fields/styling/javascript/v3
         styles: {
           'input': {
-            'font-size': '14px',
-            'color': 'pink'
+            'font-size': '14px'
           },
           'input.invalid': {
             'color': 'red'
@@ -138,7 +161,7 @@ class HostedFields extends Component {
         fields: {
           number: {
             selector: '#card-number',
-            placeholder: '4111 1111 1111 1111'
+            placeholder: '4111 1111 1111 1111',
           },
           cvv: {
             selector: '#cvv',
@@ -265,7 +288,58 @@ class HostedFields extends Component {
 
 
   render() {
+    const cardNumberLabelStyle = {
+      border: 'none',
+      backgroundColor: this.state.cardNumberLabelBgColor,
+      borderWidth: this.state.cardNumberLabelBorderSize,
+      borderColor: this.state.cardNumberLabelBorderColor,
+
+    };
+    const cardNumberInputStyle = {
+      border: 'solid',
+      height: 35,
+      backgroundColor: this.state.cardNumberInputBgColor,
+      borderWidth: this.state.cardNumberInputBorderSize,
+      borderColor: this.state.cardNumberInputBorderColor
+    };
+    const cvvLabelStyle = {
+      border: 'none',
+      backgroundColor: this.state.cvvLabelBgColor,
+      borderWidth: this.state.cvvLabelBorderSize,
+      borderColor: this.state.cvvLabelBorderColor,
+
+    };
+    const cvvInputStyle = {
+      border: 'solid',
+      height: 35,
+      backgroundColor: this.state.cvvInputBgColor,
+      borderWidth: this.state.cvvInputBorderSize,
+      borderColor: this.state.cvvInputBorderColor
+    };
+    const expirationLabelStyle = {
+      border: 'none',
+      backgroundColor: this.state.expirationLabelBgColor,
+      borderWidth: this.state.expirationLabelBorderSize,
+      borderColor: this.state.expirationLabelBorderColor,
+
+    };
+    const expirationInputStyle = {
+      border: 'solid',
+      height: 35,
+      backgroundColor: this.state.expirationInputBgColor,
+      borderWidth: this.state.expirationInputBorderSize,
+      borderColor: this.state.expirationInputBorderColor
+    };
+    // const cardNumberInputStyle = { backgroundColor: 'red', border: '1px solid', borderColor: 'blue', height: 50 };
+    // const cvvLabelStyle = { backgroundColor: 'red', border: '1px solid', borderColor: 'blue' };
+    // const cvvInputStyle = { backgroundColor: 'red', border: '1px solid', borderColor: 'blue', height: 50 };
+    // const expirationLabelStyle = { backgroundColor: 'red', border: '1px solid', borderColor: 'blue' };
+    // const expirationInputStyle = { backgroundColor: 'red', border: '1px solid', borderColor: 'blue', height: 50 };
+
+    const payInputStyle = { backgroundColor: 'forestgreen', border: '2px solid', borderColor: 'darkgreen', color: 'white' };
+
     return (
+
       <>
         {/* // {this.state.language} */}
         {/*
@@ -286,26 +360,43 @@ class HostedFields extends Component {
                 : [
                   <div className="container" >
                     <div className="row">
+
+
+                      <div className="col text-center">
+
+                      </div>
+
+
                       <div className="col text-center">
 
                         <form action="/checkout" id="hosted-fields-form" method="post">
-                          <label htmlFor="card-number">Card Number</label>
-                          <div id="card-number"></div>
+                          <br />
+                          <label htmlFor="card-number" style={cardNumberLabelStyle}>Card Number</label>
+                          <div id="card-number" style={cardNumberInputStyle}></div>
+                          <br />
 
-                          <label htmlFor="cvv">CVV</label>
-                          <div id="cvv"></div>
+                          <label htmlFor="cvv" style={cvvLabelStyle}>CVV</label>
+                          <div id="cvv" style={cvvInputStyle}></div>
+                          <br />
 
-                          <label htmlFor="expiration-date">Expiration Date</label>
-                          <div id="expiration-date"></div>
+                          <label htmlFor="expiration-date" style={expirationLabelStyle}>Expiration Date</label>
+                          <div id="expiration-date" style={expirationInputStyle}></div>
+                          <br />
 
-                          <div id="checkout-message"></div>
+                          <div id="checkout-message" ></div>
 
-                          <input type="submit" value="Pay" disabled />
+                          <input type="submit" value="Pay" disabled style={payInputStyle} />
                         </form>
 
 
 
                       </div>
+
+                      <div className="col text-center">
+
+                      </div>
+
+
                     </div>
                   </div>
 
@@ -358,6 +449,9 @@ class HostedFields extends Component {
                         <span className='float-right'>&#10004;</span>
                       }
                     </a>
+                    <a className="nav-link" id="v-pills-styling-tab" data-toggle="pill" href="#v-pills-styling" role="tab" aria-controls="v-pills-styling" aria-selected="false">
+                      Styling
+                    </a>
 
                     <select className="nav-link" id="v-pills-language-tab" data-toggle="pill" href="#v-pills-language" role="tab" aria-controls="v-pills-language" aria-selected="false"
                       onChange={e => this.setState({ language: e.target.value })}
@@ -393,6 +487,312 @@ class HostedFields extends Component {
                     <div className="tab-pane fade" id="v-pills-transaction" role="tabpanel" aria-labelledby="v-pills-transaction-tab">
                       <Transaction product={'profile'} language={this.state.language} response={this.state.clientAuthorizationResponse} />
                     </div>
+                    <div className="tab-pane fade" id="v-pills-styling" role="tabpanel" aria-labelledby="v-pills-styling-tab">
+
+
+                      <div className='row'>
+                        <div className='col'>
+
+                          <p><u>Card number Label</u></p>
+
+
+                          <p>
+                            Border color
+                            <span className='float-right'>
+                              <select name="" id="" onChange={(el) => { this.setState({ cardNumberLabelBorderColor: el.target.value }) }}>
+                                <option value="black">Black</option>
+                                <option value="red">Red</option>
+                                <option value="blue">Blue</option>
+                                <option value="green">Green</option>
+                                <option value="gray">Gray</option>
+                                <option value="yellow">Yellow</option>
+                              </select>
+                            </span>
+                          </p>
+
+                          <p>
+                            BG color
+                            <span className='float-right'>
+                              <select name="" id="" onChange={(el) => { this.setState({ cardNumberLabelBgColor: el.target.value }) }}>
+                                <option value="black">Black</option>
+                                <option value="red">Red</option>
+                                <option value="blue">Blue</option>
+                                <option value="green">Green</option>
+                                <option value="gray">Gray</option>
+                                <option value="yellow">Yellow</option>
+                              </select>
+                            </span>
+                          </p>
+
+                          <p>
+                            Border size
+                            <span className='float-right'>
+                              <select name="" id="" onChange={(el) => { this.setState({ cardNumberLabelBorderSize: el.target.value }) }}>
+                                <option value="1px">1px</option>
+                                <option value="2px">2px</option>
+                                <option value="3px">3px</option>
+                                <option value="4px">4px</option>
+                                <option value="5px">5px</option>
+                              </select>
+                            </span>
+                          </p>
+
+                          <br />
+                          <br />
+
+                          <p><u>Card number Input</u></p>
+
+
+                          <p>
+                            Border color
+                            <span className='float-right'>
+                              <select name="" id="" onChange={(el) => { this.setState({ cardNumberInputBorderColor: el.target.value }) }}>
+                                <option value="black">Black</option>
+                                <option value="red">Red</option>
+                                <option value="blue">Blue</option>
+                                <option value="green">Green</option>
+                                <option value="gray">Gray</option>
+                                <option value="yellow">Yellow</option>
+                              </select>
+                            </span>
+                          </p>
+
+                          <p>
+                            BG color
+                            <span className='float-right'>
+                              <select name="" id="" onChange={(el) => { this.setState({ cardNumberInputBgColor: el.target.value }) }}>
+                                <option value="black">Black</option>
+                                <option value="red">Red</option>
+                                <option value="blue">Blue</option>
+                                <option value="green">Green</option>
+                                <option value="gray">Gray</option>
+                                <option value="yellow">Yellow</option>
+                              </select>
+                            </span>
+                          </p>
+
+                          <p>
+                            Border size
+                            <span className='float-right'>
+                              <select name="" id="" onChange={(el) => { this.setState({ cardNumberInputBorderSize: el.target.value }) }}>
+                                <option value="1px">1px</option>
+                                <option value="2px">2px</option>
+                                <option value="3px">3px</option>
+                                <option value="4px">4px</option>
+                                <option value="5px">5px</option>
+                              </select>
+                            </span>
+                          </p>
+
+
+
+                        </div>
+
+                        <div className='col'>
+
+                          <p><u>CVV Label</u></p>
+
+
+                          <p>
+                            Border color
+                            <span className='float-right'>
+                              <select name="" id="" onChange={(el) => { this.setState({ cvvLabelBorderColor: el.target.value }) }}>
+                                <option value="black">Black</option>
+                                <option value="red">Red</option>
+                                <option value="blue">Blue</option>
+                                <option value="green">Green</option>
+                                <option value="gray">Gray</option>
+                                <option value="yellow">Yellow</option>
+                              </select>
+                            </span>
+                          </p>
+
+                          <p>
+                            BG color
+                            <span className='float-right'>
+                              <select name="" id="" onChange={(el) => { this.setState({ cvvLabelBgColor: el.target.value }) }}>
+                                <option value="black">Black</option>
+                                <option value="red">Red</option>
+                                <option value="blue">Blue</option>
+                                <option value="green">Green</option>
+                                <option value="gray">Gray</option>
+                                <option value="yellow">Yellow</option>
+                              </select>
+                            </span>
+                          </p>
+
+                          <p>
+                            Border size
+                            <span className='float-right'>
+                              <select name="" id="" onChange={(el) => { this.setState({ cvvLabelBorderSize: el.target.value }) }}>
+                                <option value="1px">1px</option>
+                                <option value="2px">2px</option>
+                                <option value="3px">3px</option>
+                                <option value="4px">4px</option>
+                                <option value="5px">5px</option>
+                              </select>
+                            </span>
+                          </p>
+
+                          <br />
+                          <br />
+
+                          <p><u>CVV Input</u></p>
+
+
+                          <p>
+                            Border color
+                            <span className='float-right'>
+                              <select name="" id="" onChange={(el) => { this.setState({ cvvInputBorderColor: el.target.value }) }}>
+                                <option value="black">Black</option>
+                                <option value="red">Red</option>
+                                <option value="blue">Blue</option>
+                                <option value="green">Green</option>
+                                <option value="gray">Gray</option>
+                                <option value="yellow">Yellow</option>
+                              </select>
+                            </span>
+                          </p>
+
+                          <p>
+                            BG color
+                            <span className='float-right'>
+                              <select name="" id="" onChange={(el) => { this.setState({ cvvInputBgColor: el.target.value }) }}>
+                                <option value="black">Black</option>
+                                <option value="red">Red</option>
+                                <option value="blue">Blue</option>
+                                <option value="green">Green</option>
+                                <option value="gray">Gray</option>
+                                <option value="yellow">Yellow</option>
+                              </select>
+                            </span>
+                          </p>
+
+                          <p>
+                            Border size
+                            <span className='float-right'>
+                              <select name="" id="" onChange={(el) => { this.setState({ cvvInputBorderSize: el.target.value }) }}>
+                                <option value="1px">1px</option>
+                                <option value="2px">2px</option>
+                                <option value="3px">3px</option>
+                                <option value="4px">4px</option>
+                                <option value="5px">5px</option>
+                              </select>
+                            </span>
+                          </p>
+
+
+
+
+                        </div>
+
+
+
+                        <div className='col'>
+
+                          <p><u>Expiration Date Label</u></p>
+
+
+                          <p>
+                            Border color
+                            <span className='float-right'>
+                              <select name="" id="" onChange={(el) => { this.setState({ expirationLabelBorderColor: el.target.value }) }}>
+                                <option value="black">Black</option>
+                                <option value="red">Red</option>
+                                <option value="blue">Blue</option>
+                                <option value="green">Green</option>
+                                <option value="gray">Gray</option>
+                                <option value="yellow">Yellow</option>
+                              </select>
+                            </span>
+                          </p>
+
+                          <p>
+                            BG color
+                            <span className='float-right'>
+                              <select name="" id="" onChange={(el) => { this.setState({ expirationLabelBgColor: el.target.value }) }}>
+                                <option value="black">Black</option>
+                                <option value="red">Red</option>
+                                <option value="blue">Blue</option>
+                                <option value="green">Green</option>
+                                <option value="gray">Gray</option>
+                                <option value="yellow">Yellow</option>
+                              </select>
+                            </span>
+                          </p>
+
+                          <p>
+                            Border size
+                            <span className='float-right'>
+                              <select name="" id="" onChange={(el) => { this.setState({ expirationLabelBorderSize: el.target.value }) }}>
+                                <option value="1px">1px</option>
+                                <option value="2px">2px</option>
+                                <option value="3px">3px</option>
+                                <option value="4px">4px</option>
+                                <option value="5px">5px</option>
+                              </select>
+                            </span>
+                          </p>
+
+                          <br />
+                          <br />
+
+                          <p><u>Expiration Date Input</u></p>
+
+
+                          <p>
+                            Border color
+                            <span className='float-right'>
+                              <select name="" id="" onChange={(el) => { this.setState({ expirationInputBorderColor: el.target.value }) }}>
+                                <option value="black">Black</option>
+                                <option value="red">Red</option>
+                                <option value="blue">Blue</option>
+                                <option value="green">Green</option>
+                                <option value="gray">Gray</option>
+                                <option value="yellow">Yellow</option>
+                              </select>
+                            </span>
+                          </p>
+
+                          <p>
+                            BG color
+                            <span className='float-right'>
+                              <select name="" id="" onChange={(el) => { this.setState({ expirationInputBgColor: el.target.value }) }}>
+                                <option value="black">Black</option>
+                                <option value="red">Red</option>
+                                <option value="blue">Blue</option>
+                                <option value="green">Green</option>
+                                <option value="gray">Gray</option>
+                                <option value="yellow">Yellow</option>
+                              </select>
+                            </span>
+                          </p>
+
+                          <p>
+                            Border size
+                            <span className='float-right'>
+                              <select name="" id="" onChange={(el) => { this.setState({ expirationInputBorderSize: el.target.value }) }}>
+                                <option value="1px">1px</option>
+                                <option value="2px">2px</option>
+                                <option value="3px">3px</option>
+                                <option value="4px">4px</option>
+                                <option value="5px">5px</option>
+                              </select>
+                            </span>
+                          </p>
+
+
+
+
+
+                        </div>
+
+
+
+
+                      </div>
+
+                    </div>
 
                   </div>
                 </div>
@@ -408,6 +808,7 @@ class HostedFields extends Component {
           *{
             'background-color:red'
           }
+
         </style>
 
 
