@@ -123,26 +123,34 @@ class HostedFields extends Component {
     this.setState({ loading: false });
   }
 
+
+
   createPaymentsDisplay = async () => {
     const CLIENT_AUTHORIZATION = await this.getClientToken();
+
+
 
 
     var form = document.querySelector('#hosted-fields-form');
     var submit = document.querySelector('input[type="submit"]');
 
     window.braintree.client.create({
+
+
       // Insert your tokenization key here
       authorization: CLIENT_AUTHORIZATION
-    }, function (clientErr, clientInstance) {
+    }, function (clientErr, clienthostedFieldsInstance) {
       if (clientErr) {
         console.error(clientErr);
         return;
       }
 
+
+
       // Create a hostedFields component to initialize the form
 
       window.braintree.hostedFields.create({
-        client: clientInstance,
+        client: clienthostedFieldsInstance,
         // Customize the Hosted Fields.
         // More information can be found at:
         // https://developers.braintreepayments.com/guides/hosted-fields/styling/javascript/v3
@@ -172,7 +180,7 @@ class HostedFields extends Component {
             placeholder: '10/2022'
           }
         }
-      }, function (hostedFieldsErr, instance) {
+      }, function (hostedFieldsErr, hostedFieldsInstance) {
         if (hostedFieldsErr) {
           console.error(hostedFieldsErr);
           return;
@@ -186,36 +194,79 @@ class HostedFields extends Component {
           event.preventDefault();
           // When the user clicks on the 'Submit payment' button this code will send the
           // encrypted payment information in a variable called a payment method nonce
-          instance.tokenize(function (tokenizeErr, payload) {
+          hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
             if (tokenizeErr) {
               console.error(tokenizeErr);
               return;
             }
             const $ = window.$;
-            instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
-              $.ajax({
-                type: 'POST',
-                url: '/checkout',
-                data: { 'paymentMethodNonce': payload.nonce }
-              }).done(function (result) {
-                // Tear down the Hosted Fields form
-                instance.teardown(function (teardownErr) {
-                  if (teardownErr) {
-                    console.error('Could not tear down the Hosted Fields form!');
-                  } else {
-                    console.info('Hosted Fields form has been torn down!');
-                    // Remove the 'Submit payment' button
-                    $('#hosted-fields-form').remove();
-                  }
-                });
+            console.log('requestPaymentMethod');
 
-                if (result.success) {
-                  $('#checkout-message').html('<h1>Success</h1><p>Your Hosted Fields form is working! Check your <a href="https://sandbox.braintreegateway.com/login">sandbox Control Panel</a> for your test transactions.</p><p>Refresh to try another transaction.</p>');
+
+            // this.createTransactionInside(payload);
+
+
+
+            // hostedFieldsInstance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
+            console.log('payload.nonce');
+            console.log(payload.nonce);
+
+            console.log('requestPaymentMethodOk');
+
+            // let oupout = api.post('/create-paymnet-hostedfields', {
+
+            // })
+
+            let finalAmount = document.getElementById('finalAmount').value;
+            console.log('finalAmount');
+            console.log(finalAmount);
+            let baseURL = process.env.REACT_APP_API_URL;
+            // AJAX START
+            $.ajax({
+              type: 'POST',
+              // url: '/checkout',
+              url: baseURL + '/create-payment-hostedfields',
+              // data: { 'nonce': payload.nonce, 'amount': 50 },
+              dataType: 'json',
+              contentType: 'application/json',
+              data: JSON.stringify({ "nonce": payload.nonce, "amount": finalAmount }),
+              // processData: false,
+
+            }).done(function (result) {
+              // Tear down the Hosted Fields form
+              hostedFieldsInstance.teardown(function (teardownErr) {
+                if (teardownErr) {
+                  console.error('Could not tear down the Hosted Fields form!');
                 } else {
-                  $('#checkout-message').html('<h1>Error</h1><p>Check your console.</p>');
+                  console.info('Hosted Fields form has been torn down!');
+                  // Remove the 'Submit payment' button
+                  $('#hosted-fields-form').remove();
                 }
               });
+
+              if (result.Success.success) {
+                console.log('success')
+                console.log(result.Success)
+                const newoutput = JSON.stringify(result.Success, null, '\t');
+                document.getElementById("transactionTextAreaJsonResponse").value = newoutput;
+
+                // HostedFields.setState({ transaction: true })
+
+                $('#checkout-message').html('<h1>Success</h1><p>Your Hosted Fields form is working! Check your <a href="https://sandbox.braintreegateway.com/login">sandbox Control Panel</a> for your test transactions.</p><p>Refresh to try another transaction.</p>');
+                $('#transactionDone').html('&#10004;');
+
+
+              } else {
+                console.log('error')
+                console.log(result)
+                $('#checkout-message').html('<h1>Error</h1><p>Check your console.</p>');
+              }
             });
+            // AJAX
+
+
+            // }
+            // );
           });
         }, false);
       });
@@ -387,7 +438,10 @@ class HostedFields extends Component {
 
                           <input type="submit" value="Pay" disabled style={payInputStyle} />
                         </form>
-
+                        <br />
+                        <div class="p-1 mb-2 bg-dark text-white">
+                          <input className='form-control' type="number" step='10' value={this.state.amount} onChange={(val) => { this.setState({ amount: val.target.value }) }} id='finalAmount' />
+                        </div>
 
 
                       </div>
@@ -436,15 +490,15 @@ class HostedFields extends Component {
                       Client-Side
                       <span className='float-right'>&#10004;</span>
                     </a>
-                    <a className="nav-link" id="v-pills-serverside-tab" data-toggle="pill" href="#v-pills-serverside" role="tab" aria-controls="v-pills-serverside" aria-selected="false">
+                    {/* <a className="nav-link" id="v-pills-serverside-tab" data-toggle="pill" href="#v-pills-serverside" role="tab" aria-controls="v-pills-serverside" aria-selected="false">
                       Server-Side
                       {this.state.vault &&
                         <span className='float-right'>&#10004;</span>
                       }
 
-                    </a>
+                    </a> */}
                     <a className="nav-link" id="v-pills-transaction-tab" data-toggle="pill" href="#v-pills-transaction" role="tab" aria-controls="v-pills-transaction" aria-selected="false">
-                      Transaction
+                      Transaction  <span className='float-right' id='transactionDone'></span>
                       {this.state.transaction &&
                         <span className='float-right'>&#10004;</span>
                       }

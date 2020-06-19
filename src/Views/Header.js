@@ -5,6 +5,19 @@ import {
 
 
 class Header extends Component {
+  state = {
+    notes: 'none',
+  }
+
+  handleNotes() {
+    console.log('handleNotes');
+    if (this.state.notes === 'none') {
+      this.setState({ notes: true });
+    } else {
+      this.setState({ notes: 'none' });
+    }
+
+  }
   render() {
     return (
       <>
@@ -34,6 +47,9 @@ class Header extends Component {
               <li className="nav-item">
                 <Link className="nav-link" to="/profile">Profile</Link>
               </li>
+              <li className="nav-item">
+                <a className="nav-link" to="" onClick={() => { this.handleNotes() }}>Notes</a>
+              </li>
             </ul>
             <form className="form-inline my-2 my-lg-0">
               <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
@@ -41,6 +57,18 @@ class Header extends Component {
             </form>
           </div>
         </nav>
+
+
+
+        <div id="mydiv" style={{ "display": this.state.notes }} >
+          <div id="mydivheader" className='bg-primary'>Click here to move <span className='float-right text-white' onClick={() => { this.handleNotes() }}>X</span></div>
+          <textarea rows='15' className='form-control'>
+          </textarea>
+        </div>
+
+
+
+
       </>
     );
   }
