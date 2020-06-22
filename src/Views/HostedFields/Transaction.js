@@ -66,7 +66,7 @@ class Transaction extends Component {
 
           <br />
           <p>
-            <a className='btn btn-primary' href="https://developers.braintreepayments.com/guides/paypal/server-side/node" target="_blank" rel='noopener noreferrer' >Server side</a>
+            <a className='btn btn-primary' href="https://developers.braintreepayments.com/start/tutorial-hosted-fields-node" target="_blank" rel='noopener noreferrer' >Server side</a>
             <a className='btn btn-primary float-right' href="https://developers.braintreepayments.com/reference/request/transaction/sale/php" target="_blank" rel='noopener noreferrer' >Transaction</a>
           </p>
 

@@ -10,7 +10,7 @@ import loadingGif from '../../assets/loading.gif';
 import './HostedFields.css';
 import ServerSide from "./ServerSide";
 import Transaction from "./Transaction";
-import Styling from "./Styling";
+// import Styling from "./Styling";
 // import uuid from 'react-uuid';
 
 
@@ -249,6 +249,7 @@ class HostedFields extends Component {
                 console.log(result.Success)
                 const newoutput = JSON.stringify(result.Success, null, '\t');
                 document.getElementById("transactionTextAreaJsonResponse").value = newoutput;
+                $('#finalAmountDiv').hide();
 
                 // HostedFields.setState({ transaction: true })
 
@@ -439,7 +440,7 @@ class HostedFields extends Component {
                           <input type="submit" value="Pay" disabled style={payInputStyle} />
                         </form>
                         <br />
-                        <div class="p-1 mb-2 bg-dark text-white">
+                        <div class="p-1 mb-2 bg-dark text-white" id='finalAmountDiv'>
                           <input className='form-control' type="number" step='10' value={this.state.amount} onChange={(val) => { this.setState({ amount: val.target.value }) }} id='finalAmount' />
                         </div>
 
@@ -746,7 +747,6 @@ class HostedFields extends Component {
 
                           <p><u>Expiration Date Label</u></p>
 
-
                           <p>
                             Border color
                             <span className='float-right'>
@@ -845,6 +845,13 @@ class HostedFields extends Component {
 
 
                       </div>
+                      <br />
+                      <br />
+                      <br />
+                      <p>
+                        <a className='btn btn-primary' href="https://developers.braintreepayments.com/guides/hosted-fields/styling/javascript/v3" target="_blank" rel='noopener noreferrer' >Styling</a>
+                      </p>
+
 
                     </div>
 
@@ -853,9 +860,17 @@ class HostedFields extends Component {
               </div>
 
 
+
+
             </div>
+
+
+
           </div>
+
+
         </div>
+
 
 
         <style>

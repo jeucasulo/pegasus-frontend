@@ -20,7 +20,7 @@ class ClientSide extends Component {
           //   </div>
           //   <div className='codeBlockBody'>
           //     <p><span className='codeBlockVar'>var</span> braintree = <span className='codeBlockRequire'>require</span>(<span className='codeBlockString'>"braintree"</span>);</p>
-          //     <p><span className='codeBlockVar'>var</span> gateway = braintree.connect(&#123;	</p>
+          //     <p><span className='codeBlockVar'>var</span> gateway = braintree.connect(&#123;;	</p>
           //     <p>&emsp;environment: braintree.Environment.Sandbox,</p>
           //     <p>&emsp;merchantId: <span className='codeBlockString'>"useYourMerchantId"</span>,</p>
           //     <p>&emsp;publicKey: <span className='codeBlockString'>"useYourPublicKey"</span>,</p>
@@ -39,14 +39,12 @@ class ClientSide extends Component {
                 HTML
               </div>
               <div className='codeBlockBody'>
-                <p className='commentLine'>&lt;!-- Load PayPal's checkout.js Library. --></p>                
-                <p><span className='propCode'>&lt;script src=</span><span className='codeBlockString'>"https://www.paypalobjects.com/api/checkout.js"</span> <span className='propCode'>data-version-4 log-level=</span><span className='codeBlockString'>"warn"</span><span className='propCode'>>&lt;/script></span></p>
-
-                <p className='commentLine'>&lt;!-- Load the client component. --></p>
-                <p><span className='propCode'>&lt;script src=</span><span className='codeBlockString'>"https://js.braintreegateway.com/web/3.62.0/js/client.min.js"</span><span className='propCode'>&lt;/script></span></p>
+                <p className='commentLine'>&lt;!-- includes the Braintree JS client SDK. --></p>                
+                <p><span className='propCode'>&lt;script src=</span><span className='codeBlockString'>"https://js.braintreegateway.com/web/3.44.2/js/client.min.js"</span> <span className='propCode'>>&lt;/script></span></p>
+                <p><span className='propCode'>&lt;script src=</span><span className='codeBlockString'>"https://js.braintreegateway.com/web/3.44.2/js/hosted-fields.min.js"</span><span className='propCode'>&lt;/script></span></p>
 
                 <p className='commentLine'>&lt;!-- Load the PayPal Checkout component. --></p>
-                <p><span className='propCode'>&lt;script src=</span><span className='codeBlockString'>"https://js.braintreegateway.com/web/3.62.0/js/paypal-checkout.min.js"</span><span className='propCode'>&lt;/script></span></p>
+                <p><span className='propCode'>&lt;script src=</span><span className='codeBlockString'>"http://code.jquery.com/jquery-3.2.1.min.js"</span> <span className='propCode'>crossorigin</span>=<span className='codeBlockString'>"anonymous"> </span><span className='propCode'>&lt;/script></span></p>
 
               </div>
             </div>
@@ -60,116 +58,138 @@ class ClientSide extends Component {
                 HTML
               </div>
               <div className='codeBlockBody'>
-                <p><span className='propCode'>&lt;div id=</span><span className='codeBlockString'>"paypal-button"</span><span className='propCode'>>&lt;/div></span></p>                
+
+                {/* here */}
+
+
+
+                <p><span class='propCode'>&lt;</span><span className='commentLine'>form</span> <span class='propCode'><span class='propCode'>action=</span></span><span className='codeBlockString'>"/checkout"</span> <span class='propCode'>id=</span><span className='codeBlockString'>"hosted-fields-form"</span><span class='propCode'>method=</span><span className='codeBlockString'>"post"</span><span class='propCode'>&gt;</span></p>
+  <p>&emsp;<span class='propCode'>&lt;</span><span className='commentLine'>label</span> <span class='propCode'>for=</span><span className='codeBlockString'>"card-number"</span><span class='propCode'>&gt;</span>Card Number<span class='propCode'>&lt;/</span><span className='commentLine'>label</span><span class='propCode'>&gt;</span></p>
+  <p>&emsp;<span class='propCode'>&lt;</span><span className='commentLine'>div</span> <span class='propCode'>id=</span><span className='codeBlockString'>"card-number"</span><span class='propCode'>&gt;</span><span class='propCode'>&lt;/</span><span className='commentLine'>div</span><span class='propCode'>&gt;</span></p>
+<p></p>
+  <p>&emsp;<span class='propCode'>&lt;</span><span className='commentLine'>label</span> <span class='propCode'>for=</span><span className='codeBlockString'>"cvv"</span><span class='propCode'>&gt;</span>CVV<span class='propCode'>&lt;/</span><span className='commentLine'>label</span><span class='propCode'>&gt;</span></p>
+  <p>&emsp;<span class='propCode'>&lt;</span><span className='commentLine'>div</span> <span class='propCode'>id=</span><span className='codeBlockString'>"cvv"</span><span class='propCode'>&gt;</span><span class='propCode'>&lt;/</span><span className='commentLine'>div</span><span class='propCode'>&gt;</span></p>
+<p></p>
+  <p>&emsp;<span class='propCode'>&lt;</span><span className='commentLine'>label</span> <span class='propCode'>for=</span><span className='codeBlockString'>"expiration-date"</span><span class='propCode'>&gt;</span>Expiration Date<span class='propCode'>&lt;/</span><span className='commentLine'>label</span><span class='propCode'>&gt;</span></p>
+  <p>&emsp;<span class='propCode'>&lt;</span><span className='commentLine'>div</span> <span class='propCode'>id=</span><span className='codeBlockString'>"expiration-date"</span><span class='propCode'>&gt;</span><span class='propCode'>&lt;/</span><span className='commentLine'>div</span><span class='propCode'>&gt;</span></p>
+<p></p>
+  <p>&emsp;<span class='propCode'>&lt;</span><span className='commentLine'>div</span> <span class='propCode'>id=</span><span className='codeBlockString'>"checkout-message"</span><span class='propCode'>&gt;</span><span class='propCode'>&lt;/</span><span className='commentLine'>div</span><span class='propCode'>&gt;</span></p>
+<p></p>
+  <p>&emsp;<span class='propCode'>&lt;</span><span className='commentLine'>input</span> <span class='propCode'>type=</span><span className='codeBlockString'>"submit"</span> <span class='propCode'>type=</span><span className='codeBlockString'>"Pay"</span> <span class='propCode'>disabled /&gt;</span></p>
+<p><span class='propCode'>&lt;/</span><span className='commentLine'>form</span><span class='propCode'>&gt;</span></p>
+<p></p>
+<p><span class='propCode'>&lt;</span><span className='commentLine'>script</span><span class='propCode'>&gt;</span></p>
+  <p>&emsp;<span class='codeBlockVar'>var</span> form = <span class='codeBlockRequire'>document</span>.querySelector(<span className='codeBlockString'>'#hosted-fields-form'</span>);</p>
+  <p>&emsp;<span class='codeBlockVar'>var</span> submit = <span class='codeBlockRequire'>document</span>.querySelector(<span className='codeBlockString'>'input[type="submit"]'</span>);</p>
+<p></p>
+  <p>&emsp;braintree.client.create(&#123;</p>
+    <p>&emsp;&emsp;<span className='commentLine'>// Insert your tokenization key here</span></p>
+    <p>&emsp;&emsp;authorization: '<span class='propCode'>&lt;</span>use_your_tokenization_key<span class='propCode'>&gt;</span>'</p>
+  <p>&emsp;&#125;, <span class='codeBlockVar'>function</span> (<span class='codeBlockRequire'>clientErr, clientInstance</span>) &#123;</p>
+    <p>&emsp;&emsp;<span class='codeBlockVar'>if</span> (clientErr) &#123;</p>
+      <p>&emsp;&emsp;&emsp;<span class='codeBlockRequire'>console</span>.error(clientErr);</p>
+      <p>&emsp;&emsp;&emsp;<span class='codeBlockVar'>return</span>;</p>
+    <p>&emsp;&emsp;&#125;</p>
+<p></p>
+    <p>&emsp;&emsp;<span className='commentLine'>// Create a hostedFields component to initialize the form</span></p>
+<p></p>
+    <p>&emsp;&emsp;braintree.hostedFields.create(&#123;</p>
+      <p>&emsp;&emsp;&emsp;client: clientInstance,</p>
+      <p>&emsp;&emsp;&emsp;<span className='commentLine'>// Customize the Hosted Fields.</span></p>
+      <p>&emsp;&emsp;&emsp;<span className='commentLine'>// More information can be found at:</span></p>
+      <p>&emsp;&emsp;&emsp;<span className='commentLine'>// https://developers.braintreepayments.com/guides/hosted-fields/styling/javascript/v3</span></p>
+      <p>&emsp;&emsp;&emsp;styles: &#123;</p>
+        <p>&emsp;&emsp;&emsp;&emsp;<span className='codeBlockString'>'input'</span>: &#123;</p>
+          <p>&emsp;&emsp;&emsp;&emsp;&emsp;<span className='codeBlockString'>'font-size'</span>: <span className='codeBlockString'>'14px'</span></p>
+        <p>&emsp;&emsp;&emsp;&emsp;&#125;,</p>
+        <p>&emsp;&emsp;&emsp;&emsp;<span className='codeBlockString'>'input.invalid'</span>: &#123;</p>
+          <p>&emsp;&emsp;&emsp;&emsp;&emsp;<span className='codeBlockString'>'color'</span>: <span className='codeBlockString'>'red'</span></p>
+        <p>&emsp;&emsp;&emsp;&emsp;&#125;,</p>
+        <p>&emsp;&emsp;&emsp;&emsp;<span className='codeBlockString'>'input.valid'</span>: &#123;</p>
+          <p>&emsp;&emsp;&emsp;&emsp;&emsp;<span className='codeBlockString'>'color'</span>: <span className='codeBlockString'>'green'</span></p>
+        <p>&emsp;&emsp;&emsp;&emsp;&#125;</p>
+      <p>&emsp;&emsp;&emsp;&#125;,</p>
+      <p>&emsp;&emsp;&emsp;<span className='commentLine'>// Configure which fields in your card form will be generated by Hosted Fields instead</span></p>
+      <p>&emsp;&emsp;&emsp;fields: &#123;</p>
+        <p>&emsp;&emsp;&emsp;&emsp;number: &#123;</p>
+          <p>&emsp;&emsp;&emsp;&emsp;&emsp;selector: <span className='codeBlockString'>'#card-number',</span></p>
+          <p>&emsp;&emsp;&emsp;&emsp;&emsp;placeholder: <span className='codeBlockString'>'4111 1111 1111 1111'</span></p>
+        <p>&emsp;&emsp;&emsp;&emsp;&#125;,</p>
+        <p>&emsp;&emsp;&emsp;&emsp;cvv: &#123;</p>
+          <p>&emsp;&emsp;&emsp;&emsp;&emsp;selector: <span className='codeBlockString'>'#cvv',</span></p>
+          <p>&emsp;&emsp;&emsp;&emsp;&emsp;placeholder: <span className='codeBlockString'>'123'</span></p>
+        <p>&emsp;&emsp;&emsp;&emsp;&#125;,</p>
+        <p>&emsp;&emsp;&emsp;&emsp;expirationDate: &#123;</p>
+          <p>&emsp;&emsp;&emsp;&emsp;&emsp;selector: <span className='codeBlockString'>'#expiration-date',</span></p>
+          <p>&emsp;&emsp;&emsp;&emsp;&emsp;placeholder: <span className='codeBlockString'>'10/2022'</span></p>
+        <p>&emsp;&emsp;&emsp;&emsp;&#125;</p>
+      <p>&emsp;&emsp;&emsp;&#125;</p>
+    <p>&emsp;&emsp;&#125;, <span class='codeBlockVar'>function</span> (<span class='codeBlockRequire'>hostedFieldsErr, instance</span>) &#123;</p>
+      <p>&emsp;&emsp;&emsp;<span class='codeBlockVar'>if</span> (hostedFieldsErr) &#123;</p>
+        <p>&emsp;&emsp;&emsp;&emsp;<span class='codeBlockRequire'>console</span>.error(hostedFieldsErr);</p>
+        <p>&emsp;&emsp;&emsp;&emsp;<span class='codeBlockVar'>return</span>;</p>
+      <p>&emsp;&emsp;&emsp;&#125;</p>
+<p></p>
+      <p>&emsp;&emsp;&emsp;<span className='commentLine'>// Once the fields are initialized enable the submit button</span></p>
+      <p>&emsp;&emsp;&emsp;submit.removeAttribute('<span class='codeBlockString'>disabled</span>');</p>
+<p></p>
+      <p>&emsp;&emsp;&emsp;<span className='commentLine'>// Initialize the form submit event</span></p>
+      <p>&emsp;&emsp;&emsp;form.addEventListener(<span className='codeBlockString'>'submit'</span>, function (event) &#123;</p>
+        <p>&emsp;&emsp;&emsp;&emsp;event.preventDefault();</p>
+        <p>&emsp;&emsp;&emsp;&emsp;<span className='commentLine'>// When the user clicks on the 'Submit payment' button this code will send the</span></p>
+        <p>&emsp;&emsp;&emsp;&emsp;<span className='commentLine'>// encrypted payment information in a variable called a payment method nonce</span></p>
+        <p>&emsp;&emsp;&emsp;&emsp;instance.tokenize(function (<span class='codeBlockRequire'>tokenizeErr, payload</span>) &#123;</p>
+          <p>&emsp;&emsp;&emsp;&emsp;&emsp;<span className='codeBlockVar'>if</span> (tokenizeErr) &#123;</p>
+            <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class='codeBlockRequire'>console</span>.error(tokenizeErr);</p>
+            <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;return;</p>
+          <p>&emsp;&emsp;&emsp;&emsp;&emsp;&#125;</p>
+<p></p>
+          <p>&emsp;&emsp;&emsp;&emsp;&emsp;instance.requestPaymentMethod(<span class='codeBlockVar'>function</span> (<span class='codeBlockRequire'>requestPaymentMethodErr, payload</span>) &#123;</p>
+            <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;$.ajax(&#123;</p>
+              <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;type: <span className='codeBlockString'>'POST',</span></p>
+              <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;url: <span className='codeBlockString'>'/checkout',</span></p>
+              <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;data: &#123;<span className='codeBlockString'>'paymentMethodNonce'</span>: payload.nonce&#125;</p>
+            <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#125;).done(<span class='codeBlockVar'>function</span>(<span class='codeBlockRequire'>result</span>) &#123;</p>
+              <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span className='commentLine'>// Tear down the Hosted Fields form</span></p>
+              <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;instance.teardown(<span class='codeBlockVar'>function</span> (<span class='codeBlockRequire'>teardownErr</span>) &#123;</p>
+                <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class='codeBlockVar'>if</span> (teardownErr) &#123;</p>
+                  <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class='codeBlockRequire'>console</span>.error(<span className='codeBlockString'>'Could not tear down the Hosted Fields form!'</span>);</p>
+                <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#125; <span class='codeBlockVar'>else</span> &#123;</p>
+                  <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;console.info(<span className='codeBlockString'>'Hosted Fields form has been torn down!'</span>);</p>
+                  <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span className='commentLine'>// Remove the 'Submit payment' button</span></p>
+                  <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;$(<span className='codeBlockString'>'#hosted-fields-form'</span>).remove();</p>
+                <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#125;</p>
+              <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#125;);</p>
+<p></p>
+              <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class='codeBlockVar'>if</span> (result.success) &#123;</p>
+                <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;$(<span className='codeBlockString'>'#checkout-message'</span>).html(<span className='codeBlockString'>'&lt;h1&gt;Success&lt;/h1&gt;</span></p>
+                <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span className='codeBlockString'>&lt;p&gt;Your Hosted Fields form is working! Check your</span></p>
+                <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span className='codeBlockString'>&lt;a <span>href="https://sandbox.braintreegateway.com/login"</span>&gt;sandbox Control Panel&lt;/a&gt;</span></p>
+                <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span className='codeBlockString'>for your test transactions.&lt;/p&gt;&lt;p&gt;Refresh to try another transaction.&lt;/p&gt;');</span></p>
+              <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#125; <span class='codeBlockVar'>else</span> &#123;</p>
+                <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;$(<span className='codeBlockString'>'#checkout-message'</span>).html(<span className='codeBlockString'>'&lt;h1&gt;Error&lt;/h1&gt;&lt;p&gt;Check your console.&lt;/p&gt;'</span>);</p>
+              <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#125;</p>
+            <p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&#125;);</p>
+          <p>&emsp;&emsp;&emsp;&emsp;&emsp;&#125;);</p>
+        <p>&emsp;&emsp;&emsp;&emsp;&#125;);</p>
+      <p>&emsp;&emsp;&emsp;&#125;, <span class='codeBlockRequire'>false</span>);</p>
+    <p>&emsp;&emsp;&#125;);</p>
+  <p>&emsp;&#125;);</p>
+<p><span class='propCode'>&lt;/</span><span className='commentLine'>script</span><span class='propCode'>&gt;</span></p>
+
+
+
+ {/* here */}
+                
               </div>
             </div>
 
             <br/>
-            <h4>Initialize components</h4>
-            <p>Every integration requires a client. Once you've created one, you can pass it to the PayPal Checkout component to accept your payments.</p>
-
-            
-            
-            
-            <div className='codeBlock'>
-              <div className='codeBlockHeader'>
-                Callbacks
-                {/* <br/>1&nbsp; 1  */}
-                {/* <br/>1&thinsp; 1 */}
-                {/* <br/>1&ensp; 2 */}
-                {/* <br/>1&emsp; 4 */}
-              </div>
-              <div className='codeBlockBody'>
-                {/*  */}
-
-                  <p className='commentLine'>// Create a client.</p>
-                  <p>braintree.client.create(&#123;</p>
-                  <p>&ensp;authorization: CLIENT_AUTHORIZATION</p>
-                  <p>}, <span className='codeBlockVar'>function</span> <span className='codeBlockString'>(</span><span className='codeBlockRequire'>clientErr, clientInstance</span><span className='codeBlockString'>)</span> &#123;	</p>
-
-                    <p className='commentLine'>&ensp;// Stop if there was a problem creating the client.</p>
-                    <p className='commentLine'>&ensp;// This could happen if there is a network error or if the authorization</p>
-                    <p className='commentLine'>&ensp;// is invalid.</p>
-                    <p><span className='codeBlockVar'>&ensp;if</span> (clientErr) &#123;	</p>
-                      <p><span className='codeBlockRequire'>&ensp;&ensp;console</span>.error(<span className='codeBlockString'>'Error creating client:'</span>, clientErr);</p>
-                      <p><span className='codeBlockVar'>&ensp;&ensp;return;</span></p>
-                      <p>&ensp;}</p>
-                    <p></p>
-                    <p className='commentLine'> &ensp;// Create a PayPal Checkout component.</p>
-                    <p>&ensp;braintree.paypalCheckout.create(&#123;	</p>
-                      <p>&ensp;&ensp;client: clientInstance</p>
-                      <p>&ensp;}, <span className='codeBlockVar'>function</span> <span className='codeBlockString'>(</span><span className='codeBlockRequire'>paypalCheckoutErr, paypalCheckoutInstance</span><span className='codeBlockString'>)</span> &#123;	</p>
-
-                        <p className='commentLine'>&ensp;// Stop if there was a problem creating PayPal Checkout.</p>
-                        <p className='commentLine'>&ensp;// This could happen if there was a network error or if it's incorrectly</p>
-                        <p className='commentLine'>&ensp;// configured.</p>
-                        <p><span className='codeBlockVar'>&ensp;if</span> (paypalCheckoutErr) &#123;	</p>
-                          <p><span className='codeBlockRequire'>&ensp;&ensp;console</span>.error('Error creating PayPal Checkout:', paypalCheckoutErr);</p>
-                          <p><span className='codeBlockVar'>&ensp;&ensp;return;</span></p>
-                          <p>&ensp;}</p>
-                      <p></p>
-                      <p className='commentLine'>&ensp;// Set up PayPal with the checkout.js library</p>
-                      <p>&ensp;paypal.Button.render(&#123;	</p>
-                        <p>&ensp;&ensp;env: <span className='codeBlockString'>'production'</span>, // or 'sandbox'</p>
-                        <p>&ensp;&ensp;commit: <span className='codeBlockRequire'>true</span>, <span className='commentLine'>// This will add the transaction amount to the PayPal button</span></p>
-
-                        <p>&ensp;&ensp;payment: <span className='codeBlockVar'>function</span> <span className='codeBlockString'>()</span> &#123;	</p>
-                          <p><span className='codeBlockVar'>&ensp;&ensp;&ensp;return</span> paypalCheckoutInstance.createPayment(&#123;	</p>
-                            {/* <p className='commentLine'>&ensp;&ensp;&ensp;&ensp;// Your PayPal options here. For available options, see</p>
-                            <p className='commentLine'>&ensp;&ensp;&ensp;&ensp;// http://braintree.github.io/braintree-web/current/PayPalCheckout.html#createPayment</p> */}
-                            <p>&ensp;&ensp;&ensp;&ensp;flow: <span className='codeBlockString'>'vault'</span>, <span className='commentLine'>// Required</span></p>
-                            <p>&ensp;&ensp;&ensp;&ensp;billingAgreementDescription: <span className='codeBlockString'>'Your agreement description'</span>, <span className='commentLine'>// Required</span></p>                            
-                            <p>&ensp;&ensp;&ensp;&ensp;enableShippingAddress: <span className='codeBlockRequire'>true</span>,</p>
-                            <p>&ensp;&ensp;&ensp;&ensp;shippingAddressEditable: <span className='codeBlockRequire'>false</span>,</p>
-                            <p>&ensp;&ensp;&ensp;&ensp;shippingAddressOverride: &#123;</p>
-                              <p>&ensp;&ensp;&ensp;&ensp;&ensp;recipientName: <span className='codeBlockString'>'Scruff McGruff'</span>,</p>
-                              <p>&ensp;&ensp;&ensp;&ensp;&ensp;line1: <span className='codeBlockString'>'1234 Main St.'</span>,</p>
-                              <p>&ensp;&ensp;&ensp;&ensp;&ensp;line2: <span className='codeBlockString'>'Unit 1'</span>,</p>
-                              <p>&ensp;&ensp;&ensp;&ensp;&ensp;city: <span className='codeBlockString'>'Chicago'</span>,</p>
-                              <p>&ensp;&ensp;&ensp;&ensp;&ensp;countryCode: <span className='codeBlockString'>'US'</span>,</p>
-                              <p>&ensp;&ensp;&ensp;&ensp;&ensp;postalCode: <span className='codeBlockString'>'60652'</span>,</p>
-                              <p>&ensp;&ensp;&ensp;&ensp;&ensp;state: <span className='codeBlockString'>'IL'</span>,</p>
-                              <p>&ensp;&ensp;&ensp;&ensp;&ensp;phone: <span className='codeBlockString'>'123.456.7890'</span></p>
-                              <p>&ensp;&ensp;&ensp;&ensp;&ensp;}</p>                            
-                            <p>&ensp;&ensp;&ensp;});</p>
-                            <p>&ensp;&ensp;},</p>
-
-                            <p>&ensp;onAuthorize: <span className='codeBlockVar'>function</span> <span className='codeBlockString'>(</span><span className='codeBlockRequire'>data, actions</span><span className='codeBlockString'>)</span> &#123;	</p>
-                              <p>&ensp;&ensp;return paypalCheckoutInstance.tokenizePayment(data, function <span className='codeBlockString'>(</span><span className='codeBlockRequire'>err, payload</span><span className='codeBlockString'>)</span> &#123;	</p>
-                                <p className='commentLine'>&ensp;&ensp;&ensp;// Submit `payload.nonce` to your server.</p>
-                              <p>&ensp;&ensp;});</p>
-                            <p>&ensp;},</p>
-                        <p></p>
-                        <p>&ensp;onCancel: <span className='codeBlockVar'>function</span> <span className='codeBlockString'>(</span><span className='codeBlockRequire'>data</span>) &#123;	</p>
-                          <p>&ensp;&ensp;console.log(<span className='codeBlockString'>'checkout.js payment cancelled'</span>, <span className='codeBlockRequire'>JSON</span>.stringify(data, <span className='codeBlockRequire'>0</span>, <span className='codeBlockRequire'>2</span>));</p>
-                          <p>&ensp;},</p>
-
-                          <p>&ensp;onError: <span className='codeBlockVar'>function</span> <span className='codeBlockString'>(</span><span className='codeBlockRequire'>err</span>) &#123;	</p>
-                            <p>&ensp;&ensp;<span className='codeBlockRequire'>console</span>.error(<span className='codeBlockString'>'checkout.js error'</span>, err);</p>
-                            <p>&ensp;}</p>
-                            <p>&ensp;&ensp;}, <span className='codeBlockString'>'#paypal-button'</span>).then(<span className='codeBlockVar'>function</span> <span className='codeBlockString'>()</span> &#123;	</p>
-                              <p className='commentLine'>&ensp;&ensp;&ensp;// The PayPal button will be rendered in an html element with the id</p>
-                              <p className='commentLine'>&ensp;&ensp;&ensp;// `paypal-button`. This function will be called when the PayPal button</p>
-                              <p className='commentLine'>&ensp;&ensp;&ensp;// is set up and ready to be used.</p>
-                              <p>&ensp;&ensp;});</p>
-
-                  <p>&ensp;});</p>
-
-                  <p>});</p>
-
-
-                
-                {/*  */}
-              </div>
-            </div>
-
-
-
             
             <br/>
             <p>
-              <a className='btn btn-primary' href="https://developers.braintreepayments.com/guides/paypal/client-side/javascript/v3" target="_blank" rel='noopener noreferrer' >Client side</a>
-              <a className='btn btn-primary float-right' href="https://developers.braintreepayments.com/guides/paypal/vault/javascript/v3" target="_blank" rel='noopener noreferrer' >Vault</a>
+              <a className='btn btn-primary' href="https://developers.braintreepayments.com/start/tutorial-hosted-fields-node" target="_blank" rel='noopener noreferrer'>Client Side</a>
+              <a className='btn btn-primary float-right' href="https://developers.braintreepayments.com/guides/hosted-fields/overview/javascript/v3" target="_blank" rel='noopener noreferrer'>Hosted Fields</a>
             </p>
             
             {/* <p></p> */}
@@ -236,38 +256,38 @@ class ClientSide extends Component {
             {/*  */}
 
               <p className='commentLine'>// Create a client.</p>
-              <p>braintree.client.create(&#123;</p>
+              <p>braintree.client.create(&#123;;</p>
               <p>&ensp;authorization: CLIENT_AUTHORIZATION</p>
-              <p>}, <span className='codeBlockVar'>function</span> <span className='codeBlockString'>(</span><span className='codeBlockRequire'>clientErr, clientInstance</span><span className='codeBlockString'>)</span> &#123;	</p>
+              <p>}, <span className='codeBlockVar'>function</span> <span className='codeBlockString'>(</span><span className='codeBlockRequire'>clientErr, clientInstance</span><span className='codeBlockString'>)</span> &#123;;	</p>
 
                 <p className='commentLine'>&ensp;// Stop if there was a problem creating the client.</p>
                 <p className='commentLine'>&ensp;// This could happen if there is a network error or if the authorization</p>
                 <p className='commentLine'>&ensp;// is invalid.</p>
-                <p><span className='codeBlockVar'>&ensp;if</span> (clientErr) &#123;	</p>
+                <p><span className='codeBlockVar'>&ensp;if</span> (clientErr) &#123;;	</p>
                   <p><span className='codeBlockRequire'>&ensp;&ensp;console</span>.error(<span className='codeBlockString'>'Error creating client:'</span>, clientErr);</p>
                   <p><span className='codeBlockVar'>&ensp;&ensp;return;</span></p>
                   <p>&ensp;}</p>
                 <p></p>
                 <p className='commentLine'> &ensp;// Create a PayPal Checkout component.</p>
-                <p>&ensp;braintree.paypalCheckout.create(&#123;	</p>
+                <p>&ensp;braintree.paypalCheckout.create(&#123;;	</p>
                   <p>&ensp;&ensp;client: clientInstance</p>
-                  <p>&ensp;}, <span className='codeBlockVar'>function</span> <span className='codeBlockString'>(</span><span className='codeBlockRequire'>paypalCheckoutErr, paypalCheckoutInstance</span><span className='codeBlockString'>)</span> &#123;	</p>
+                  <p>&ensp;}, <span className='codeBlockVar'>function</span> <span className='codeBlockString'>(</span><span className='codeBlockRequire'>paypalCheckoutErr, paypalCheckoutInstance</span><span className='codeBlockString'>)</span> &#123;;	</p>
 
                     <p className='commentLine'>&ensp;// Stop if there was a problem creating PayPal Checkout.</p>
                     <p className='commentLine'>&ensp;// This could happen if there was a network error or if it's incorrectly</p>
                     <p className='commentLine'>&ensp;// configured.</p>
-                    <p><span className='codeBlockVar'>&ensp;if</span> (paypalCheckoutErr) &#123;	</p>
+                    <p><span className='codeBlockVar'>&ensp;if</span> (paypalCheckoutErr) &#123;;	</p>
                       <p><span className='codeBlockRequire'>&ensp;&ensp;console</span>.error('Error creating PayPal Checkout:', paypalCheckoutErr);</p>
                       <p><span className='codeBlockVar'>&ensp;&ensp;return;</span></p>
                       <p>&ensp;}</p>
                   <p></p>
                   <p className='commentLine'>&ensp;// Set up PayPal with the checkout.js library</p>
-                  <p>&ensp;paypal.Button.render(&#123;	</p>
+                  <p>&ensp;paypal.Button.render(&#123;;	</p>
                     <p>&ensp;&ensp;env: <span className='codeBlockString'>'production'</span>, // or 'sandbox'</p>
                     <p>&ensp;&ensp;commit: <span className='codeBlockRequire'>true</span>, <span className='commentLine'>// This will add the transaction amount to the PayPal button</span></p>
 
-                    <p>&ensp;&ensp;payment: <span className='codeBlockVar'>function</span> <span className='codeBlockString'>()</span> &#123;	</p>
-                      <p><span className='codeBlockVar'>&ensp;&ensp;&ensp;return</span> paypalCheckoutInstance.createPayment(&#123;	</p>
+                    <p>&ensp;&ensp;payment: <span className='codeBlockVar'>function</span> <span className='codeBlockString'>()</span> &#123;;	</p>
+                      <p><span className='codeBlockVar'>&ensp;&ensp;&ensp;return</span> paypalCheckoutInstance.createPayment(&#123;;	</p>
                         {/* <p className='commentLine'>&ensp;&ensp;&ensp;&ensp;// Your PayPal options here. For available options, see</p>
                         <p className='commentLine'>&ensp;&ensp;&ensp;&ensp;// http://braintree.github.io/braintree-web/current/PayPalCheckout.html#createPayment</p> */}
                         <p>&ensp;&ensp;&ensp;&ensp;flow: <span className='codeBlockString'>'vault'</span>, <span className='commentLine'>// Required</span></p>
@@ -275,7 +295,7 @@ class ClientSide extends Component {
                         <p>&ensp;&ensp;&ensp;&ensp;currency: <span className='codeBlockString'>'USD'</span>, <span className='commentLine'>// Required</span></p>
                         <p>&ensp;&ensp;&ensp;&ensp;enableShippingAddress: <span className='codeBlockRequire'>true</span>,</p>
                         <p>&ensp;&ensp;&ensp;&ensp;shippingAddressEditable: <span className='codeBlockRequire'>false</span>,</p>
-                        <p>&ensp;&ensp;&ensp;&ensp;shippingAddressOverride: &#123;</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;shippingAddressOverride: &#123;;</p>
                           <p>&ensp;&ensp;&ensp;&ensp;&ensp;recipientName: <span className='codeBlockString'>'Scruff McGruff'</span>,</p>
                           <p>&ensp;&ensp;&ensp;&ensp;&ensp;line1: <span className='codeBlockString'>'1234 Main St.'</span>,</p>
                           <p>&ensp;&ensp;&ensp;&ensp;&ensp;line2: <span className='codeBlockString'>'Unit 1'</span>,</p>
@@ -288,20 +308,20 @@ class ClientSide extends Component {
                         <p>&ensp;&ensp;&ensp;});</p>
                         <p>&ensp;&ensp;},</p>
 
-                        <p>&ensp;onAuthorize: <span className='codeBlockVar'>function</span> <span className='codeBlockString'>(</span><span className='codeBlockRequire'>data, actions</span><span className='codeBlockString'>)</span> &#123;	</p>
-                          <p>&ensp;&ensp;return paypalCheckoutInstance.tokenizePayment(data, function <span className='codeBlockString'>(</span><span className='codeBlockRequire'>err, payload</span><span className='codeBlockString'>)</span> &#123;	</p>
+                        <p>&ensp;onAuthorize: <span className='codeBlockVar'>function</span> <span className='codeBlockString'>(</span><span className='codeBlockRequire'>data, actions</span><span className='codeBlockString'>)</span> &#123;;	</p>
+                          <p>&ensp;&ensp;return paypalCheckoutInstance.tokenizePayment(data, function <span className='codeBlockString'>(</span><span className='codeBlockRequire'>err, payload</span><span className='codeBlockString'>)</span> &#123;;	</p>
                             <p className='commentLine'>&ensp;&ensp;&ensp;// Submit `payload.nonce` to your server.</p>
                           <p>&ensp;&ensp;});</p>
                         <p>&ensp;},</p>
                     <p></p>
-                    <p>&ensp;onCancel: <span className='codeBlockVar'>function</span> <span className='codeBlockString'>(</span><span className='codeBlockRequire'>data</span>) &#123;	</p>
+                    <p>&ensp;onCancel: <span className='codeBlockVar'>function</span> <span className='codeBlockString'>(</span><span className='codeBlockRequire'>data</span>) &#123;;	</p>
                       <p>&ensp;&ensp;console.log(<span className='codeBlockString'>'checkout.js payment cancelled'</span>, <span className='codeBlockRequire'>JSON</span>.stringify(data, <span className='codeBlockRequire'>0</span>, <span className='codeBlockRequire'>2</span>));</p>
                       <p>&ensp;},</p>
 
-                      <p>&ensp;onError: <span className='codeBlockVar'>function</span> <span className='codeBlockString'>(</span><span className='codeBlockRequire'>err</span>) &#123;	</p>
+                      <p>&ensp;onError: <span className='codeBlockVar'>function</span> <span className='codeBlockString'>(</span><span className='codeBlockRequire'>err</span>) &#123;;	</p>
                         <p>&ensp;&ensp;<span className='codeBlockRequire'>console</span>.error(<span className='codeBlockString'>'checkout.js error'</span>, err);</p>
                         <p>&ensp;}</p>
-                        <p>&ensp;&ensp;}, <span className='codeBlockString'>'#paypal-button'</span>).then(<span className='codeBlockVar'>function</span> <span className='codeBlockString'>()</span> &#123;	</p>
+                        <p>&ensp;&ensp;}, <span className='codeBlockString'>'#paypal-button'</span>).then(<span className='codeBlockVar'>function</span> <span className='codeBlockString'>()</span> &#123;;	</p>
                           <p className='commentLine'>&ensp;&ensp;&ensp;// The PayPal button will be rendered in an html element with the id</p>
                           <p className='commentLine'>&ensp;&ensp;&ensp;// `paypal-button`. This function will be called when the PayPal button</p>
                           <p className='commentLine'>&ensp;&ensp;&ensp;// is set up and ready to be used.</p>
@@ -345,7 +365,7 @@ class ClientSide extends Component {
         </div>
         <div className='codeBlockBody'>
           <p><span className='codeBlockVar'>var</span> braintree = <span className='codeBlockRequire'>require</span>(<span className='codeBlockString'>"braintree"</span>);</p>
-          <p><span className='codeBlockVar'>var</span> gateway = braintree.connect(&#123;	</p>
+          <p><span className='codeBlockVar'>var</span> gateway = braintree.connect(&#123;;	</p>
           <p>&emsp;environment: braintree.Environment.Sandbox,</p>
           <p>&emsp;merchantId: <span className='codeBlockString'>"useYourMerchantId"</span>,</p>
           <p>&emsp;publicKey: <span className='codeBlockString'>"useYourPublicKey"</span>,</p>

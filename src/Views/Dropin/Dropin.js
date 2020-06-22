@@ -366,9 +366,7 @@ class Dropin extends Component {
               <br />
               <p>
 
-                <div class="p-3 mb-2 bg-dark text-white">
-                  <input className='form-control' type="number" step='10' value={this.state.amount} onChange={(val) => { this.setState({ amount: val.target.value }) }} />
-                </div>
+
 
 
 
@@ -382,6 +380,21 @@ class Dropin extends Component {
                 </div>
               </div> */}
 
+
+            </div>
+          </div>
+          <br />
+          <br />
+          <div className='row'>
+            <div className='col'>
+
+            </div>
+            <div className='col'>
+              <div class="p-1 mb-2 bg-dark text-white">
+                <input className='form-control' type="number" step='10' value={this.state.amount} onChange={(val) => { this.setState({ amount: val.target.value }) }} />
+              </div>
+            </div>
+            <div className='col'>
 
             </div>
           </div>
