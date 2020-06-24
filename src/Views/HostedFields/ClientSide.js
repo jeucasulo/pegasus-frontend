@@ -30,9 +30,9 @@ class ClientSide extends Component {
           // </div>
           <>
             <br/>
-            <h3>Basic configuration</h3>
+            <h3>Include the Braintree client SDK</h3>
 
-            <p>If you are using script tags to load files, be sure to at least include:</p>
+            <p>For this tutorial, we'll use the latest Braintree JavaScript SDK. Add the following code just above the closing &lt;/head&gt; tag in views/layout.hbs.</p>
 
             <div className='codeBlock'>
               <div className='codeBlockHeader'>
@@ -43,7 +43,7 @@ class ClientSide extends Component {
                 <p><span className='propCode'>&lt;script src=</span><span className='codeBlockString'>"https://js.braintreegateway.com/web/3.44.2/js/client.min.js"</span> <span className='propCode'>>&lt;/script></span></p>
                 <p><span className='propCode'>&lt;script src=</span><span className='codeBlockString'>"https://js.braintreegateway.com/web/3.44.2/js/hosted-fields.min.js"</span><span className='propCode'>&lt;/script></span></p>
 
-                <p className='commentLine'>&lt;!-- Load the PayPal Checkout component. --></p>
+                <p className='commentLine'>&lt;!-- includes jQuery --></p>
                 <p><span className='propCode'>&lt;script src=</span><span className='codeBlockString'>"http://code.jquery.com/jquery-3.2.1.min.js"</span> <span className='propCode'>crossorigin</span>=<span className='codeBlockString'>"anonymous"> </span><span className='propCode'>&lt;/script></span></p>
 
               </div>

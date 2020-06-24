@@ -30,146 +30,146 @@ class ClientSide extends Component {
           // </div>
           <>
             <br/>
-            <h3>Basic configuration</h3>
+            <h3>Include the Braintree client SDK</h3>
 
-            <p>If you are using script tags to load files, be sure to at least include:</p>
+            <p>For this tutorial, we'll use the latest Braintree JavaScript SDK. Add the following code just above the closing &lt;/head&gt; tag in views/layout.hbs.</p>
 
             <div className='codeBlock'>
               <div className='codeBlockHeader'>
                 HTML
               </div>
               <div className='codeBlockBody'>
-                <p className='commentLine'>&lt;!-- Load PayPal's checkout.js Library. --></p>                
-                <p><span className='propCode'>&lt;script src=</span><span className='codeBlockString'>"https://www.paypalobjects.com/api/checkout.js"</span> <span className='propCode'>data-version-4 log-level=</span><span className='codeBlockString'>"warn"</span><span className='propCode'>>&lt;/script></span></p>
+                <p className='commentLine'>&lt;!-- includes the Braintree JS client SDK --></p>                
+                <p><span className='propCode'>&lt;script src=</span><span className='codeBlockString'>"https://js.braintreegateway.com/web/dropin/1.22.1/js/dropin.min.js"</span> <span className='propCode'>>&lt;/script></span></p>                
 
-                <p className='commentLine'>&lt;!-- Load the client component. --></p>
-                <p><span className='propCode'>&lt;script src=</span><span className='codeBlockString'>"https://js.braintreegateway.com/web/3.62.0/js/client.min.js"</span><span className='propCode'>&lt;/script></span></p>
-
-                <p className='commentLine'>&lt;!-- Load the PayPal Checkout component. --></p>
-                <p><span className='propCode'>&lt;script src=</span><span className='codeBlockString'>"https://js.braintreegateway.com/web/3.62.0/js/paypal-checkout.min.js"</span><span className='propCode'>&lt;/script></span></p>
+                <p className='commentLine'>&lt;!-- includes jQuery --></p>
+                <p><span className='propCode'>&lt;script src=</span><span className='codeBlockString'>"http://code.jquery.com/jquery-3.2.1.min.js"</span> <span className='propCode'>crossorigin</span>=<span className='codeBlockString'>"anonymous"> </span><span className='propCode'>&lt;/script></span></p>
 
               </div>
             </div>
-
             <br/>
             <p>Regardless of which method you use to load files, create a div element. This is where your PayPal button will appear.</p>
 
 
-            <div className='codeBlock'>
+
+<div className='codeBlock'>
               <div className='codeBlockHeader'>
                 HTML
               </div>
               <div className='codeBlockBody'>
-                <p><span className='propCode'>&lt;div id=</span><span className='codeBlockString'>"paypal-button"</span><span className='propCode'>>&lt;/div></span></p>                
+
+                {/* here */}
+
+<p>&lt;div id=<span className='codeBlockString'>"dropin-wrapper"</span>&gt;</p>
+<p>&emsp;  &lt;div id=<span className='codeBlockString'>"checkout-message"</span>&gt;&lt;/div&gt;</p>
+<p>&emsp;  &lt;div id=<span className='codeBlockString'>"dropin-container"</span>&gt;&lt;/div&gt;</p>
+<p>&emsp;  &lt;button id=<span className='codeBlockString'>"submit-button"</span>&gt;Submit payment&lt;/button&gt;</p>
+<p>&lt;/div&gt;</p>
+<p>&lt;script&gt;</p>
+<p>&emsp;  <span className='codeBlockVar'>var</span> button = <span className='codeBlockRequire'></span>document.querySelector(<span className='codeBlockString'>'#submit-button'</span>);</p>
+<p></p>
+<p>&emsp;  braintree.dropin.create(&#123;</p>
+<p>&emsp;&emsp;    // Insert your tokenization key here</p>
+<p>&emsp;&emsp;    authorization: <span className='codeBlockString'>'&lt;use_your_tokenization_key&gt;'</span>,</p>
+<p>&emsp;&emsp;    container: <span className='codeBlockString'>'#dropin-container'</span></p>
+<p>&emsp;  &#125;, <span className='codeBlockVar'>function</span> (<span className='codeBlockRequire'>createErr, instance</span>) &#123;</p>
+<p>&emsp;&emsp;    button.addEventListener(<span className='codeBlockString'>'click'</span>, <span className='codeBlockVar'>function</span> () &#123;</p>
+<p>&emsp;&emsp;&emsp;      instance.requestPaymentMethod(<span className='codeBlockVar'>function</span> (<span className='codeBlockRequire'>requestPaymentMethodErr, payload</span>) &#123;</p>
+<p>&emsp;&emsp;&emsp;&emsp;        // When the user clicks on the 'Submit payment' button this code will send the</p>
+<p>&emsp;&emsp;&emsp;&emsp;        // encrypted payment information in a variable called a payment method nonce</p>
+<p>&emsp;&emsp;&emsp;&emsp;        $.ajax(&#123;</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;         type: <span className='codeBlockString'>'POST'</span>,</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;         url: <span className='codeBlockString'>'/checkout'</span>,</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;         data: &#123;<span className='codeBlockString'>'paymentMethodNonce'</span>: payload.nonce&#125;</p>
+<p>&emsp;&emsp;&emsp;&emsp;        &#125;).done(<span className='codeBlockVar'>function</span>(<span className='codeBlockRequire'>result</span>) &#123;</p>
+<p>&emsp;&emsp;&emsp;&emsp;          // Tear down the Drop-in UI</p>
+<p>&emsp;&emsp;&emsp;&emsp;          instance.teardown(function (teardownErr) &#123;</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;            <span className='codeBlockVar'>if</span> (<span className='codeBlockRequire'>teardownErr</span>) &#123;</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;              <span className='codeBlockRequire'>console</span>.error(<span className='codeBlockString'>'Could not tear down Drop-in UI!'</span>);</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;            &#125; <span className='codeBlockVar'>else</span> &#123;</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;              <span className='codeBlockRequire'>console</span>.info(<span className='codeBlockString'>'Drop-in UI has been torn down!'</span>);</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;              // Remove the 'Submit payment' button</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;              $(<span className='codeBlockString'>'#submit-button'</span>).remove();</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;            &#125;</p>
+<p>&emsp;&emsp;&emsp;&emsp;          &#125;);</p>
+<p></p>
+<p>&emsp;&emsp;&emsp;&emsp;          <span className='codeBlockVar'>if</span> (result.success) &#123;</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;            $('#checkout-message').html(<span className='codeBlockString'>'&lt;h1&gt;Success&lt;/h1&gt;&lt;p&gt;Your Drop-in UI is working! </span></p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;            <span className='codeBlockString'>Check your &lt;a href="https://sandbox.braintreegateway.com/login"&gt;sandbox Control Panel&lt;/a&gt; </span></p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;            <span className='codeBlockString'>for your test transactions.&lt;/p&gt;&lt;p&gt;Refresh to try another transaction.&lt;/p&gt;'</span>);</p>
+<p>&emsp;&emsp;&emsp;&emsp;          &#125; <span className='codeBlockVar'>else</span> &#123;</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;            <span className='codeBlockRequire'>console</span>.log(result);</p>
+<p>&emsp;&emsp;&emsp;&emsp;&emsp;            $(<span className='codeBlockString'>'#checkout-message'</span>).html(<span className='codeBlockString'>'&lt;h1&gt;Error&lt;/h1&gt;&lt;p&gt;Check your console.&lt;/p&gt;'</span>);</p>
+<p>&emsp;&emsp;&emsp;&emsp;          &#125;</p>
+<p>&emsp;&emsp;&emsp;        &#125;);</p>
+<p>&emsp;&emsp;      &#125;);</p>
+<p>&emsp;    &#125;);</p>
+<p>  &#125;);</p>
+<p>&lt;/script&gt;</p>
+
+
+                
+
+ {/* here */}
+                
               </div>
             </div>
 
             <br/>
-            <h4>Initialize components</h4>
-            <p>Every integration requires a client. Once you've created one, you can pass it to the PayPal Checkout component to accept your payments.</p>
 
-            
-            
-            
+            <h3>PayPal</h3>
+            <p> If you have PayPal configured in your gateway, include a PayPal configuration object in your create call to render a PayPal option. To use our Vault flow, include flow: 'vault' in your PayPal configuration:</p>
+
             <div className='codeBlock'>
               <div className='codeBlockHeader'>
                 Callbacks
-                {/* <br/>1&nbsp; 1  */}
-                {/* <br/>1&thinsp; 1 */}
-                {/* <br/>1&ensp; 2 */}
-                {/* <br/>1&emsp; 4 */}
               </div>
               <div className='codeBlockBody'>
-                {/*  */}
 
-                  <p className='commentLine'>// Create a client.</p>
-                  <p>braintree.client.create(&#123;</p>
-                  <p>&ensp;authorization: CLIENT_AUTHORIZATION</p>
-                  <p>}, <span className='codeBlockVar'>function</span> <span className='codeBlockString'>(</span><span className='codeBlockRequire'>clientErr, clientInstance</span><span className='codeBlockString'>)</span> &#123;	</p>
+                <p>braintree.dropin.create(&#123;</p>
+                <p>&emsp;  authorization: <span className='codeBlockString'>'CLIENT_AUTHORIZATION'</span>,</p>
+                <p>&emsp;  container: <span className='codeBlockString'>'#dropin-container'</span>,</p>
+                <p>&emsp;  paypal: &#123;</p>
+                <p>&emsp;&emsp;    flow: <span className='codeBlockString'>'vault'</span></p>
+                <p>&emsp;  &#125;</p>
+                <p>&#125;, callback);</p>
 
-                    <p className='commentLine'>&ensp;// Stop if there was a problem creating the client.</p>
-                    <p className='commentLine'>&ensp;// This could happen if there is a network error or if the authorization</p>
-                    <p className='commentLine'>&ensp;// is invalid.</p>
-                    <p><span className='codeBlockVar'>&ensp;if</span> (clientErr) &#123;	</p>
-                      <p><span className='codeBlockRequire'>&ensp;&ensp;console</span>.error(<span className='codeBlockString'>'Error creating client:'</span>, clientErr);</p>
-                      <p><span className='codeBlockVar'>&ensp;&ensp;return;</span></p>
-                      <p>&ensp;}</p>
-                    <p></p>
-                    <p className='commentLine'> &ensp;// Create a PayPal Checkout component.</p>
-                    <p>&ensp;braintree.paypalCheckout.create(&#123;	</p>
-                      <p>&ensp;&ensp;client: clientInstance</p>
-                      <p>&ensp;}, <span className='codeBlockVar'>function</span> <span className='codeBlockString'>(</span><span className='codeBlockRequire'>paypalCheckoutErr, paypalCheckoutInstance</span><span className='codeBlockString'>)</span> &#123;	</p>
-
-                        <p className='commentLine'>&ensp;// Stop if there was a problem creating PayPal Checkout.</p>
-                        <p className='commentLine'>&ensp;// This could happen if there was a network error or if it's incorrectly</p>
-                        <p className='commentLine'>&ensp;// configured.</p>
-                        <p><span className='codeBlockVar'>&ensp;if</span> (paypalCheckoutErr) &#123;	</p>
-                          <p><span className='codeBlockRequire'>&ensp;&ensp;console</span>.error('Error creating PayPal Checkout:', paypalCheckoutErr);</p>
-                          <p><span className='codeBlockVar'>&ensp;&ensp;return;</span></p>
-                          <p>&ensp;}</p>
-                      <p></p>
-                      <p className='commentLine'>&ensp;// Set up PayPal with the checkout.js library</p>
-                      <p>&ensp;paypal.Button.render(&#123;	</p>
-                        <p>&ensp;&ensp;env: <span className='codeBlockString'>'production'</span>, // or 'sandbox'</p>
-                        <p>&ensp;&ensp;commit: <span className='codeBlockRequire'>true</span>, <span className='commentLine'>// This will add the transaction amount to the PayPal button</span></p>
-
-                        <p>&ensp;&ensp;payment: <span className='codeBlockVar'>function</span> <span className='codeBlockString'>()</span> &#123;	</p>
-                          <p><span className='codeBlockVar'>&ensp;&ensp;&ensp;return</span> paypalCheckoutInstance.createPayment(&#123;	</p>
-                            {/* <p className='commentLine'>&ensp;&ensp;&ensp;&ensp;// Your PayPal options here. For available options, see</p>
-                            <p className='commentLine'>&ensp;&ensp;&ensp;&ensp;// http://braintree.github.io/braintree-web/current/PayPalCheckout.html#createPayment</p> */}
-                            <p>&ensp;&ensp;&ensp;&ensp;flow: <span className='codeBlockString'>'vault'</span>, <span className='commentLine'>// Required</span></p>
-                            <p>&ensp;&ensp;&ensp;&ensp;billingAgreementDescription: <span className='codeBlockString'>'Your agreement description'</span>, <span className='commentLine'>// Required</span></p>                            
-                            <p>&ensp;&ensp;&ensp;&ensp;enableShippingAddress: <span className='codeBlockRequire'>true</span>,</p>
-                            <p>&ensp;&ensp;&ensp;&ensp;shippingAddressEditable: <span className='codeBlockRequire'>false</span>,</p>
-                            <p>&ensp;&ensp;&ensp;&ensp;shippingAddressOverride: &#123;</p>
-                              <p>&ensp;&ensp;&ensp;&ensp;&ensp;recipientName: <span className='codeBlockString'>'Scruff McGruff'</span>,</p>
-                              <p>&ensp;&ensp;&ensp;&ensp;&ensp;line1: <span className='codeBlockString'>'1234 Main St.'</span>,</p>
-                              <p>&ensp;&ensp;&ensp;&ensp;&ensp;line2: <span className='codeBlockString'>'Unit 1'</span>,</p>
-                              <p>&ensp;&ensp;&ensp;&ensp;&ensp;city: <span className='codeBlockString'>'Chicago'</span>,</p>
-                              <p>&ensp;&ensp;&ensp;&ensp;&ensp;countryCode: <span className='codeBlockString'>'US'</span>,</p>
-                              <p>&ensp;&ensp;&ensp;&ensp;&ensp;postalCode: <span className='codeBlockString'>'60652'</span>,</p>
-                              <p>&ensp;&ensp;&ensp;&ensp;&ensp;state: <span className='codeBlockString'>'IL'</span>,</p>
-                              <p>&ensp;&ensp;&ensp;&ensp;&ensp;phone: <span className='codeBlockString'>'123.456.7890'</span></p>
-                              <p>&ensp;&ensp;&ensp;&ensp;&ensp;}</p>                            
-                            <p>&ensp;&ensp;&ensp;});</p>
-                            <p>&ensp;&ensp;},</p>
-
-                            <p>&ensp;onAuthorize: <span className='codeBlockVar'>function</span> <span className='codeBlockString'>(</span><span className='codeBlockRequire'>data, actions</span><span className='codeBlockString'>)</span> &#123;	</p>
-                              <p>&ensp;&ensp;return paypalCheckoutInstance.tokenizePayment(data, function <span className='codeBlockString'>(</span><span className='codeBlockRequire'>err, payload</span><span className='codeBlockString'>)</span> &#123;	</p>
-                                <p className='commentLine'>&ensp;&ensp;&ensp;// Submit `payload.nonce` to your server.</p>
-                              <p>&ensp;&ensp;});</p>
-                            <p>&ensp;},</p>
-                        <p></p>
-                        <p>&ensp;onCancel: <span className='codeBlockVar'>function</span> <span className='codeBlockString'>(</span><span className='codeBlockRequire'>data</span>) &#123;	</p>
-                          <p>&ensp;&ensp;console.log(<span className='codeBlockString'>'checkout.js payment cancelled'</span>, <span className='codeBlockRequire'>JSON</span>.stringify(data, <span className='codeBlockRequire'>0</span>, <span className='codeBlockRequire'>2</span>));</p>
-                          <p>&ensp;},</p>
-
-                          <p>&ensp;onError: <span className='codeBlockVar'>function</span> <span className='codeBlockString'>(</span><span className='codeBlockRequire'>err</span>) &#123;	</p>
-                            <p>&ensp;&ensp;<span className='codeBlockRequire'>console</span>.error(<span className='codeBlockString'>'checkout.js error'</span>, err);</p>
-                            <p>&ensp;}</p>
-                            <p>&ensp;&ensp;}, <span className='codeBlockString'>'#paypal-button'</span>).then(<span className='codeBlockVar'>function</span> <span className='codeBlockString'>()</span> &#123;	</p>
-                              <p className='commentLine'>&ensp;&ensp;&ensp;// The PayPal button will be rendered in an html element with the id</p>
-                              <p className='commentLine'>&ensp;&ensp;&ensp;// `paypal-button`. This function will be called when the PayPal button</p>
-                              <p className='commentLine'>&ensp;&ensp;&ensp;// is set up and ready to be used.</p>
-                              <p>&ensp;&ensp;});</p>
-
-                  <p>&ensp;});</p>
-
-                  <p>});</p>
-
-
-                
-                {/*  */}
               </div>
             </div>
 
+<br/>
+<br/>
+            <p> To use Checkout with PayPal, include flow: 'checkout' as well as an amount and currency.</p>
+
+
+            <div className='codeBlock'>
+              <div className='codeBlockHeader'>
+                Callbacks
+              </div>
+              <div className='codeBlockBody'>
+
+                <p>braintree.dropin.create(&#123;</p>
+                <p>&emsp;  authorization: <span className='codeBlockString'>'CLIENT_AUTHORIZATION'</span>,</p>
+                <p>&emsp;  container: <span className='codeBlockString'>'#dropin-container'</span>,</p>
+                <p>&emsp;  paypal: &#123;</p>
+                <p>&emsp;&emsp;    flow: <span className='codeBlockString'>'checkout'</span>,</p>
+                <p>&emsp;&emsp;    amount: <span className='codeBlockString'>'10.00'</span>,</p>
+                <p>&emsp;&emsp;    currency: <span className='codeBlockString'>'USD'</span></p>
+                <p>&emsp;  &#125;</p>
+                <p>&#125;, callback);</p>
+
+              </div>
+            </div>
+
+
+            
 
 
             
             <br/>
             <p>
-              <a className='btn btn-primary' href="https://developers.braintreepayments.com/guides/paypal/client-side/javascript/v3" target="_blank" rel='noopener noreferrer' >Client side</a>
-              <a className='btn btn-primary float-right' href="https://developers.braintreepayments.com/guides/paypal/vault/javascript/v3" target="_blank" rel='noopener noreferrer' >Vault</a>
+              <a className='btn btn-primary' href="https://developers.braintreepayments.com/start/tutorial-drop-in-node" target="_blank" rel='noopener noreferrer' >Client side</a>
+              <a className='btn btn-primary float-right' href="https://developers.braintreepayments.com/guides/drop-in/setup-and-integration/javascript/v3" target="_blank" rel='noopener noreferrer' >DropIn</a>              
             </p>
             
             {/* <p></p> */}
